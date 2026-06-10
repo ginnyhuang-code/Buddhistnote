@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>功德之本 · 向佛而行</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@300;400;500;700&family=Noto+Sans+TC:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ink:       #2C2825;
+      --ink-mid:   #5C5047;
+      --ink-light: #9C8E84;
+      --parchment: #F7F3EE;
+      --warm:      #EDE5D8;
+      --rule:      #D5C9BA;
+      --gold:      #8B6914;
+      --gold-light:#C9A84C;
+      --red:       #8B2020;
+      --active-bg: #F0E8D8;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Noto Serif TC', serif;
+      background: var(--parchment);
+      color: var(--ink);
+      min-height: 100vh;
+    }
+
+    /* ── Top nav ── */
+    .site-nav {
+      background: var(--ink);
+      padding: 0 2rem;
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      height: 52px;
+    }
+    .site-nav a {
+      color: var(--rule);
+      text-decoration: none;
+      font-family: 'Noto Sans TC', sans-serif;
+      font-size: .85rem;
+      letter-spacing: .08em;
+      transition: color .2s;
+    }
+    .site-nav a:hover { color: var(--gold-light); }
+    .site-nav .nav-current {
+      color: var(--gold-light);
+      font-family: 'Noto Sans TC', sans-serif;
+      font-size: .85rem;
+      letter-spacing: .08em;
+      cursor: default;
+    }
+    .site-nav .site-title {
+      color: var(--gold-light);
+      font-family: 'Noto Serif TC', serif;
+      font-size: .95rem;
+      font-weight: 500;
+      margin-right: auto;
+    }
+
+    /* ── Page header ── */
+    .page-header {
+      border-bottom: 1px solid var(--rule);
+      padding: 3rem 2rem 2rem;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    .page-header .eyebrow {
+      font-family: 'Noto Sans TC', sans-serif;
+      font-size: .78rem;
+      letter-spacing: .15em;
+      color: var(--gold);
+      margin-bottom: .6rem;
+    }
+    .page-header h1 {
+      font-size: 2rem;
+      font-weight: 700;
+      letter-spacing: .05em;
+      color: var(--ink);
+      margin-bottom: .5rem;
+    }
+    .page-header .meta {
+      font-size: .85rem;
+      color: var(--ink-light);
+      font-family: 'Noto Sans TC', sans-serif;
+    }
+
+    /* ── Layout ── */
+    .layout {
+      max-width: 900px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 200px 1fr;
+      gap: 0;
+      align-items: start;
+    }
+
+    /* ── Sidebar ── */
+    .sidebar {
+      position: sticky;
+      top: 1.5rem;
+      padding: 2rem 1.5rem 2rem 0;
+      border-right: 1px solid var(--rule);
+    }
+    .sidebar-label {
+      font-family: 'Noto Sans TC', sans-serif;
+      font-size: .72rem;
+      letter-spacing: .15em;
+      color: var(--ink-light);
+      margin-bottom: 1rem;
+      padding-left: .75rem;
+    }
+    .sidebar nav { display: flex; flex-direction: column; gap: .2rem; }
+    .sidebar nav button {
+      background: none;
+      border: none;
+      cursor: pointer;
+      text-align: left;
+      padding: .55rem .75rem;
+      border-radius: 4px;
+      font-family: 'Noto Serif TC', serif;
+      font-size: .85rem;
+      color: var(--ink-mid);
+      line-height: 1.5;
+      transition: background .15s, color .15s;
+    }
+    .sidebar nav button:hover {
+      background: var(--warm);
+      color: var(--ink);
+    }
+    .sidebar nav button.active {
+      background: var(--active-bg);
+      color: var(--gold);
+      font-weight: 500;
+      border-left: 2px solid var(--gold);
+      padding-left: calc(.75rem - 2px);
+    }
+
+    /* ── Main content ── */
+    .main {
+      padding: 2rem 0 4rem 2.5rem;
+    }
+
+    .section { display: none; }
+    .section.active { display: block; }
+
+    /* ── Section header ── */
+    .section-header {
+      padding-bottom: 1.2rem;
+      border-bottom: 1px solid var(--rule);
+      margin-bottom: 2rem;
+    }
+    .section-header .tag {
+      font-family: 'Noto Sans TC', sans-serif;
+      font-size: .75rem;
+      letter-spacing: .12em;
+      color: var(--gold);
+      margin-bottom: .4rem;
+    }
+    .section-header h2 {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--ink);
+      letter-spacing: .04em;
+    }
+    .section-header .date {
+      font-size: .8rem;
+      color: var(--ink-light);
+      font-family: 'Noto Sans TC', sans-serif;
+      margin-top: .3rem;
+    }
+
+    /* ── Verse box ── */
+    .verse-box {
+      background: var(--warm);
+      border-left: 3px solid var(--gold);
+      padding: 1rem 1.4rem;
+      margin: 1.5rem 0;
+      border-radius: 0 4px 4px 0;
+    }
+    .verse-box .verse-label {
+      font-family: 'Noto Sans TC', sans-serif;
+      font-size: .72rem;
+      letter-spacing: .12em;
+      color: var(--gold);
+      margin-bottom: .5rem;
+    }
+    .verse-box .verse-text {
+      font-size: .95rem;
+      line-height: 2;
+      color: var(--ink);
+      font-weight: 500;
+    }
+
+    /* ── Prose ── */
+    .prose p {
+      font-size: .95rem;
+      line-height: 2;
+      color: var(--ink);
+      margin-bottom: 1.2rem;
+      text-indent: 2em;
+    }
+    .prose p:last-child { margin-bottom: 0; }
+
+    /* ── Original text table ── */
+    .orig-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.5rem 0;
+    }
+    .orig-table th, .orig-table td {
+      border: 1px solid var(--rule);
+      padding: .8rem 1rem;
+      font-size: .88rem;
+      line-height: 1.9;
+      vertical-align: top;
+    }
+    .orig-table th {
+      background: var(--warm);
+      font-weight: 500;
+      color: var(--gold);
+      font-family: 'Noto Sans TC', sans-serif;
+      letter-spacing: .06em;
+      width: 30%;
+    }
+    .orig-table td { color: var(--ink); }
+
+    /* ── Section divider ── */
+    .sub-heading {
+      font-size: .85rem;
+      font-weight: 500;
+      color: var(--gold);
+      letter-spacing: .08em;
+      margin: 2rem 0 .8rem;
+      font-family: 'Noto Sans TC', sans-serif;
+    }
+
+    /* ── Mobile ── */
+    @media (max-width: 640px) {
+      .layout { grid-template-columns: 1fr; }
+      .sidebar {
+        position: static;
+        border-right: none;
+        border-bottom: 1px solid var(--rule);
+        padding: 1.5rem 0 1rem;
+      }
+      .sidebar nav { flex-direction: row; flex-wrap: wrap; gap: .4rem; }
+      .sidebar nav button { font-size: .8rem; padding: .4rem .6rem; }
+      .main { padding: 1.5rem 0 3rem; }
+    }
+  </style>
+</head>
+<body>
+
+<nav class="site-nav">
+  <span class="site-title">向佛而行</span>
+  <a href="index.html">首頁</a>
+  <span class="nav-current">功德之本</span>
+  <a href="#">菩提道次第略論</a>
+</nav>
+
+<div class="page-header">
+  <div class="eyebrow">宗喀巴大師著・法尊法師譯・遠登格西講授</div>
+  <h1>《功德之本》</h1>
+  <div class="meta">原文偈頌 ＋ 六堂課講授筆記</div>
+</div>
+
+<div class="layout">
+
+  <!-- ── Sidebar ── -->
+  <aside class="sidebar">
+    <div class="sidebar-label">目錄</div>
+    <nav>
+      <button class="active" onclick="show('s0', this)">偈頌原文</button>
+      <button onclick="show('s1', this)">第一堂　115/4/13</button>
+      <button onclick="show('s2', this)">第二堂　115/4/20</button>
+      <button onclick="show('s3', this)">第三堂　115/4/25</button>
+      <button onclick="show('s4', this)">第四堂　115/5/4</button>
+      <button onclick="show('s5', this)">第五堂　115/5/18</button>
+      <button onclick="show('s6', this)">第六堂　115/5/25</button>
+    </nav>
+  </aside>
+
+  <!-- ── Main ── -->
+  <main class="main">
+
+    <!-- 原文 -->
+    <div class="section active" id="s0">
+      <div class="section-header">
+        <div class="tag">偈頌原文</div>
+        <h2>《功德之本》全文</h2>
+      </div>
+      <table class="orig-table">
+        <tr>
+          <th>前行（2偈）</th>
+          <td>
+            <div class="verse-label" style="font-size:.75rem;color:var(--gold);letter-spacing:.1em;margin-bottom:.4rem;font-family:'Noto Sans TC',sans-serif;">【道之根本～依止善知識】</div>
+            諸功德本謂如理，依止恩師是道基，善了知己多策勵，恭敬親近祈加持。
+            <br><br>
+            <div class="verse-label" style="font-size:.75rem;color:var(--gold);letter-spacing:.1em;margin-bottom:.4rem;font-family:'Noto Sans TC',sans-serif;">【暇身義大勸受心要】</div>
+            偶一得此暇滿身，知極難得具大義，遍諸晝夜恒無間，生取堅心願加持。
+          </td>
+        </tr>
+        <tr>
+          <th>共下士道（2偈）</th>
+          <td>
+            <div class="verse-label" style="font-size:.75rem;color:var(--gold);letter-spacing:.1em;margin-bottom:.4rem;font-family:'Noto Sans TC',sans-serif;">【念死無常及黑白業果】</div>
+            身命動搖如水泡，速疾壞滅當念死，死後如影隨於形，黑白業果恆隨逐。
+            <br><br>
+            <div class="verse-label" style="font-size:.75rem;color:var(--gold);letter-spacing:.1em;margin-bottom:.4rem;font-family:'Noto Sans TC',sans-serif;">【止惡修善】</div>
+            獲定解已於罪聚，雖諸小罪亦應除，勤修一切妙善聚，常不放逸祈加持。
+          </td>
+        </tr>
+        <tr>
+          <th>共中士道（2偈）</th>
+          <td>
+            <div class="verse-label" style="font-size:.75rem;color:var(--gold);letter-spacing:.1em;margin-bottom:.4rem;font-family:'Noto Sans TC',sans-serif;">【見三有過患生取解脫心】</div>
+            受用無厭眾苦門，不可保見過患已，當希求信三有樂，解脫妙樂願加持。
+            <br><br>
+            <div class="verse-label" style="font-size:.75rem;color:var(--gold);letter-spacing:.1em;margin-bottom:.4rem;font-family:'Noto Sans TC',sans-serif;">【抉擇解脫道體】</div>
+            清淨意樂所求發，正念正知不放逸，聖教根本別解脫，修為堅實祈加持。
+          </td>
+        </tr>
+        <tr>
+          <th>共上士道<br>修菩提心（1偈）<br>顯宗（2偈）<br>密宗（3偈）</th>
+          <td>
+            <div class="verse-label" style="font-size:.75rem;color:var(--gold);letter-spacing:.1em;margin-bottom:.4rem;font-family:'Noto Sans TC',sans-serif;">【修菩提心】</div>
+            如自沉沒三有海，慈母眾生悉如是，見己荷度眾生擔，修為堅實祈加持。
+            <br><br>
+            <div class="verse-label" style="font-size:.75rem;color:var(--gold);letter-spacing:.1em;margin-bottom:.4rem;font-family:'Noto Sans TC',sans-serif;">顯宗修行分二</div>
+            <div class="verse-label" style="font-size:.75rem;color:var(--gold);letter-spacing:.1em;margin-bottom:.4rem;font-family:'Noto Sans TC',sans-serif;">【顯宗共同行修法】</div>
+            發心若不學三戒，當知定不證菩提，故應勤發大精進，學菩提戒祈加持。
+            <br><br>
+            <div class="verse-label" style="font-size:.75rem;color:var(--gold);letter-spacing:.1em;margin-bottom:.4rem;font-family:'Noto Sans TC',sans-serif;">【般若最後兩者修行法・止觀】</div>
+            散馳邪境令寂滅，如理觀察真實義，疾止妙觀雙運道，速當生起願加持。
+            <br><br>
+            <div class="verse-label" style="font-size:.75rem;color:var(--gold);letter-spacing:.1em;margin-bottom:.4rem;font-family:'Noto Sans TC',sans-serif;">密宗修行分三</div>
+            <div class="verse-label" style="font-size:.75rem;color:var(--gold);letter-spacing:.1em;margin-bottom:.4rem;font-family:'Noto Sans TC',sans-serif;">【容續器修密受四灌頂入金剛乘】</div>
+            善修共道成法器，乘中最勝金剛乘，諸善丈夫勝道階，順利趨入祈加持。
+            <br><br>
+            <div class="verse-label" style="font-size:.75rem;color:var(--gold);letter-spacing:.1em;margin-bottom:.4rem;font-family:'Noto Sans TC',sans-serif;">【受灌頂時承諾誓言及戒律如何清淨】</div>
+            爾時二種成就本，謂獲淨律三昧耶，願獲真實決定解，捨命守護祈加持。
+            <br><br>
+            <div class="verse-label" style="font-size:.75rem;color:var(--gold);letter-spacing:.1em;margin-bottom:.4rem;font-family:'Noto Sans TC',sans-serif;">【持戒後如何修二次第法】</div>
+            次正通達續部心（要），二次宗要善勤習，四座瑜伽不放漫，如師教修願加持。
+          </td>
+        </tr>
+        <tr>
+          <th>祈願與發願（2偈）</th>
+          <td>
+            <div class="verse-label" style="font-size:.75rem;color:var(--gold);letter-spacing:.1em;margin-bottom:.4rem;font-family:'Noto Sans TC',sans-serif;">【祈願修道順緣成就違緣消滅】</div>
+            願說如是妙道師，及正修伴堅固住，內外一切諸障礙，速疾息滅祈加持。
+            <br><br>
+            <div class="verse-label" style="font-size:.75rem;color:var(--gold);letter-spacing:.1em;margin-bottom:.4rem;font-family:'Noto Sans TC',sans-serif;">【發願永不離師及求證果位】</div>
+            祈願生生不離師，善師受用正法樂，圓滿道地諸功德，速證勝位金剛持。
+          </td>
+        </tr>
+      </table>
+    </div>
+
+    <!-- 第一堂 -->
+    <div class="section" id="s1">
+      <div class="section-header">
+        <div class="tag">前行</div>
+        <h2>第一堂課</h2>
+        <div class="date">上課日期：115/4/13　主講：遠登格西</div>
+      </div>
+      <div class="verse-box">
+        <div class="verse-label">【道之根本～依止善知識】</div>
+        <div class="verse-text">諸功德本謂如理，依止恩師是道基，善了知己多策勵，恭敬親近祈加持。</div>
+      </div>
+      <div class="verse-box">
+        <div class="verse-label">【暇身義大勸受心要】</div>
+        <div class="verse-text">偶一得此暇滿身，知極難得具大義，遍諸晝夜恒無間，生取堅心願加持。</div>
+      </div>
+      <div class="prose">
+        <p>《功德之本》與《三主要道》內容相似，不同之處在於《功德之本》進一步涵蓋了密續的部分，從顯教到密續的修行層次皆包含其中，內容相當精華。在二十一度母法會等場合中，會反覆誦念《功德之本》，透過誦念來思維與修習修心的次第。若覺得《菩提道次第廣論》內容廣大不易吸收，《功德之本》可視為已整理好的精華偈頌，涵蓋廣論主要內容。藏人多能背誦此偈，因長期於法會中誦念，自然熟記。在格魯傳承中極為普遍且受到重視，甚至在故鄉，許多在家長者即使未完全理解內容，也會將其作為日常功課背誦。</p>
+        <p>此偈頌為宗喀巴大師所著，屬於道次第的重要著作之一。內容包括道之根本（依止善知識）、暇滿人身的意義，以及下、中、上三士道，並以偈頌方式說明，後段亦涉及止觀修行及密法次第。若有時間，應背誦並反覆思維。修行需仰賴恩師與根本上師的加持，因為成佛的關鍵在於調整內心，而給予最大加持與引導者即是根本上師。能得人身並值遇佛法，代表過去累積深厚善因，才能接觸佛陀教法與宗喀巴大師所傳的菩提道次第，使凡夫能認識成佛的修行道路。</p>
+        <p>人身之所以複雜，是因為仍處於輪迴之中，而輪迴的根本在於「有漏」，其源頭即為無明與我執。無明使我們無法如實了解事物，於不明之處以自我觀點推測，因而產生種種煩惱。凡夫因無明與我執，對境生起錯誤認知，進而造作不善業，使生命流轉於輪迴之中。佛法的目的在於幫助我們認識內心，了解無明與執著如何使我們墮落。</p>
+        <p>若欲真正脫離煩惱，必須依止善知識，使取捨無誤，並依其指引修行。有些人可於一生中成佛，有些需歷經數世修行；即使無法於今生成就，也能藉此淨化罪障、理解修行之道並實踐，這一切皆仰賴善知識的引導。佛法深奧，若無足夠福報難以直接理解，故需依賴歷代大論師與菩薩的著作，使我們逐步明白其中義理。</p>
+        <p>真正的理解仍須依止善知識。於菩提道次第中，開頭皆強調依止善知識的重要性。道之根本即在於依止善知識，調整內心，尋找能正確引導修行之上師。第一偈頌云：「諸功德本謂如理，依止恩師是道基。善了知己多策勵，恭敬親近祈加持。」說明一切功德之本在於如理認知，而依止恩師為修行之基礎，並需觀察自身、精進努力，以恭敬心親近並祈請加持。</p>
+        <p>此處所說的「功德」，指的是能引導凡夫成佛的善法，包括資糧道、加行道、見道、修道與無學道。欲進入這些修行次第，皆須依止善知識。既然了解其重要性，便應更加策勵精進，因人身短暫，往往等到理解佛法珍貴時已年歲漸長，容易因世間事務與煩惱而懈怠。因此應恭敬善知識，祈請其加持。真正的善知識，是能減輕我們內心煩惱，引導我們走向佛果的大乘善知識。</p>
+        <p>《菩提道次第廣論》與其他論典亦提到善知識應具備的條件，如戒、定、慧三學具足，智慧通達、內心寂靜，具慈悲心，善於說法且不厭倦弟子提問，並能精進弘法、正確闡述佛法義理。雖然通達空性並不容易，但能無誤理解並教導他人者，即為修道之根本恩師。</p>
+        <p>修行時可依此偈觀修：觀想善知識為諸佛菩薩的代表，為引導自己成佛的根本上師，於四方有諸佛菩薩加持。思維上師的功德、智慧與慈悲，祈請加持，使自己增長信心與能力，並淨化罪障。觀想五色光融入自身，並觀想周圍一切眾生（如父母及親近之人）共同接受加持，使身心寧靜、功德增長，並淨化對三寶與上師的不敬，這即為實修的過程。</p>
+        <p>課程亦強調「暇滿人身」的重要。得到暇滿人身應學會取捨善惡，其難得程度如大海中盲龜偶遇浮木之孔。眾生數量無量，而具備暇滿條件者極為稀少。暇滿人身具八暇與十圓滿，遠離三惡道與障礙修行之狀態，並具備聞法與修行之條件。我們能得此身並接觸佛法，已極為難得，應珍惜此機會精進修行。</p>
+        <p>八暇包括遠離地獄、餓鬼、畜生、邊地、長壽天、邪見、佛不出世與喑啞等狀態；十圓滿則包含自身與他緣條件，如生於有佛法之地、諸根具足、未造重罪、具信心，以及佛法住世、善知識存在等。</p>
+        <p>相較於戰爭、飢荒等困境，我們的條件已相當具足，應知足並精進修行。應善用暇滿人身，多行善法、利益眾生，並調整內心煩惱。此生若不把握，來世未必再得人身。實修不僅是學習，更需培養不退轉之心。在現代環境中，眾生心易散亂，即使日常忙碌，仍應把握時間修學佛法。在家人亦可於生活中逐步進步，培養穩定的修行習慣。</p>
+        <p>最後於問答中說明觀修方法：觀想一切眾生皆曾為我之父母，數量無法計算。過去的父母今世可能為敵人、陌生人或其他眾生，無法以凡夫之力辨識。應觀想一切眾生如今生父母般，接受五色光加持，淨化罪障並累積善根。透過此觀修，可培養廣大心量與大愛，並將善行分享與回向給一切眾生。</p>
+      </div>
+    </div>
+
+    <!-- 第二堂 -->
+    <div class="section" id="s2">
+      <div class="section-header">
+        <div class="tag">共下士道</div>
+        <h2>第二堂課</h2>
+        <div class="date">上課日期：115/4/20　主講：遠登格西</div>
+      </div>
+      <div class="verse-box">
+        <div class="verse-label">【念死無常及黑白業果】</div>
+        <div class="verse-text">身命動搖如水泡，速疾壞滅當念死，死後如影隨於形，黑白業果恆隨逐。</div>
+      </div>
+      <div class="verse-box">
+        <div class="verse-label">【止惡修善】</div>
+        <div class="verse-text">獲定解已於罪聚，雖諸小罪亦應除，勤修一切妙善聚，常不放逸祈加持。</div>
+      </div>
+      <div class="prose">
+        <p>本堂課先複習第一堂課內容。一開始說明依止善知識的重要性，《廣論》中提到應「視師如父」，但前提是需長時間觀察，確認此善知識能帶給我們真正完整的佛法，並能引導生起出離心、菩提心與空正見。此類上師極為難得，需在內心深處真正認知其所傳之法。</p>
+        <p>接著說明「暇身義大勸受心要」。暇滿人身必須善加運用，雖然得到人身，但不一定具備學佛因緣，需具足五根、並能遇到善知識。今生應努力累積來生來世人天善趣之資糧，使未來仍能投生善趣，繼續利益眾生，最終共同證得佛果。因此無論晝夜，都應以修學佛法來累積資糧，並學會對暇滿人身作出正確取捨。</p>
+        <p>本堂課進入「如何吸取要義分三」，說明《廣論》、《略論》與《三主要道》等道次第修行，皆包含三個要義。依眾生根器不同，佛陀開示下士道、中士道與上士道三種修行層次。小乘僅有下士道法門，未包含上士道。「共下士道」則為大乘亦需修學之基礎，內容包括因果觀、暇滿人身難得等，並非只為個人解脫。其修行重點包含念死無常與黑白業果。課中指出，人身可用於修學佛法的時間有限，多數人往往因遭遇痛苦，才尋求依靠而接觸佛法。若年紀漸長，修學時間更為有限，因此趁年輕精進修學極為重要。</p>
+        <p>「身命動搖如水泡」，生命剎那變化不定，年輕人未必能活到老，應及早修學。「速疾壞滅當念死」，死亡隨時可能發生，學佛心態亦可能隨時間退轉。初學時心力強盛，但隨時間可能因懶惰與煩惱而退失。由於習氣深重，需長時間修正，才能穩定修學佛法。因此應持續提醒自己，不論多忙多累，每日皆應從事與佛法相關之修持，例如誦念《功德之本》、思惟法義，以鞏固修行初心，使生活融入法義之中。</p>
+        <p>煩惱習氣根源於相續中的無明與我執，進而生起六根本煩惱。由於福報不足且煩惱強盛，內心易被控制，認為佛法不重要，難以生起正確認知。因此今生能得殊勝教法並遇善知識極為重要。</p>
+        <p>「死後如影隨於形，黑白業果恆隨逐」，死亡時無法帶走親人與執著，唯有業力隨身。十二緣起詳述從無明到投胎與死亡之過程，並指出臨終應調整心態，培養善業習氣。死亡前應持續行善，死後僅善業與不善業隨心續而行，決定未來去向。</p>
+        <p>黑白業果依成熟時間分為三類：順現法受業（今生造業今生受報）、順次生受業（今生造業來世受報）、順後受業（今生造業於多世後成熟）。課中舉例：在家居士毆打出家人，導致從下一世連續五百世墮惡趣，此屬順次生受業。另有順後受業，例如今生修色界的禪，未必立即得果，可能數百世後成熟。無明指無法如實見到真實相，以自我觀點認知事物，因此行為可能正確或錯誤。行為的業力取決於動機，例如同樣禮佛，一者為恭敬修行，一者為愛面子，其業果不同。</p>
+        <p>依業之體性，可分為非福業（如殺生、妄語、離間、破和合僧，導致三惡趣）、福業（為避免墮落而行善，但屬有漏）、不動業（修禪定求生色界）。依性質則分為有漏善、無漏善、不善與無記業。無記業指非善非惡之業，例如色界煩惱所造之業。業亦可分為身語意三業，並對應十善與十不善。身業為不殺生、不偷盜、不邪淫；語業為不妄語、不離間、不惡口、不綺語；意業則為不貪、不瞋、不邪見。</p>
+        <p>《止惡修善》中「獲定解已於罪聚，雖諸小罪亦應除」為止惡，「勤修一切妙善聚，常不放逸祈加持」為修善。修行者需正確認識自己，不可將過失推諉於他人。應客觀觀察，了解問題起於內心無明與煩惱。若缺乏自我觀察，則容易將錯誤歸於外境。能接受挫折源於自身錯誤，即為真實修行。若心存傲慢，則無法證悟佛法精華。若無法覺察粗重煩惱，則難以進一步觀修細微煩惱。「雖諸小罪」提醒，即使細微煩惱亦需對治。我執為墮落根本，使眾生產生親疏分別。菩薩則以慈悲心對待一切眾生，如同對待母親，並在修行中逐步削弱我執。</p>
+        <p>「勤修一切妙善聚」強調在斷惡後，持續精進修行十善業，善行需長期累積。「常不放逸」則提醒隨時警覺自身行為，並祈請上師與諸佛加持。觀想光明加持自身，以增強修善力量。以上為「共下士道修心次第」，包含念死無常、深信業果、止惡修善。</p>
+        <p>接著進入「共中士道修心次第」。中士道分為兩個重點，首先是生起出離心。《見三有過患生取解脫心》中指出：「受用無厭眾苦門，不可保見過患已，當希求信三有樂，解脫妙樂願加持。」佛法修學重在修心與自我檢視，而非表現於外。若學佛後行為無改善，則僅止於學習而未真正修行。需透過修心，逐漸對治瞋恚、懶惰與貪瞋癡。進一步說明三苦：苦苦、壞苦、行苦。三苦為輪迴之果，同時亦促使眾生再造惡業，形成惡性循環。世間一切有漏法本質皆為苦，例如工作、飲食與物質享受，皆無法帶來恆常安樂。</p>
+        <p>「當希求信三有樂，解脫妙樂願加持」說明三界輪迴皆具過患，應生起厭離心，追求解脫之樂。唯有修學佛法，方能從內心達到究竟解脫。課中亦說明三有為生有、死有與中有（中陰身），六道眾生於此三種狀態中流轉。若對現世過於滿足，則難以生起精進心。修學佛法需付出努力，安逸狀態反而不利證悟。</p>
+        <p>補充另一個版本：「受用無厭為一切苦門，輪迴圓滿實無可依賴，知其過患而已解脫樂，生起極大需求其加持。」此版本翻譯更貼切藏文意義，觀察後明知三有（生有、死有、中有）的樂並非究竟，因此它不可靠，真正的樂解脫了方能尋到究竟的樂，所以為了脫離輪迴三界的樂尋求解脫，前提必須生起出離心及精進心等方能解脫，祈願上師等諸佛加持一邊思維一邊觀修。</p>
+      </div>
+    </div>
+
+    <!-- 第三堂 -->
+    <div class="section" id="s3">
+      <div class="section-header">
+        <div class="tag">共中士道・共上士道開端</div>
+        <h2>第三堂課</h2>
+        <div class="date">上課日期：115/4/25　主講：遠登格西</div>
+      </div>
+      <div class="verse-box">
+        <div class="verse-label">【見三有過患生取解脫心】</div>
+        <div class="verse-text">受用無厭眾苦門，不可保見過患已，當希求信三有樂，解脫妙樂願加持。</div>
+      </div>
+      <div class="verse-box">
+        <div class="verse-label">【抉擇解脫道體】</div>
+        <div class="verse-text">清淨意樂所求發，正念正知不放逸，聖教根本別解脫，修為堅實祈加持。</div>
+      </div>
+      <div class="verse-box">
+        <div class="verse-label">【修菩提心】（本堂課講授偈頌部分內容）</div>
+        <div class="verse-text">如自沉沒三有海，慈母眾生悉如是，見己荷度眾生擔，修為堅實祈加持。</div>
+      </div>
+      <div class="prose">
+        <p>本堂課首先複習前兩堂課內容。修行佛法首先要依止善知識，因為善知識是道之根本。若沒有善知識引導，只靠自己讀佛經，不一定能正確理解佛陀所說的五道十地與修行次第，甚至可能產生誤解。因此，應先觀察善知識功德，之後依止善知識，在其座下聞法，再進一步思惟與實修。</p>
+        <p>接著要思惟暇滿人身難得。今生得到能修行的人身，是非常珍貴的機會。過去世所造惡業，應透過修心、懺悔與淨化，使未來不再承受惡果；今生則應積德行善，為了來世不墮三惡趣、脫離輪迴，最終利益一切有情眾生成佛。因此，應在暇滿人身中晝夜精進修行，獲得此生真正的大義。</p>
+        <p>在三士道的修行次第中，首先是共下士道。共下士道重點在於念死無常與深信業果。死亡何時來臨並不確定，所以應常思惟「死亡可能就在明天」，以此提醒自己好好修行，不留下遺憾。同時要了解黑白業果：造不善業必感不善果，造善業則能得到人天善趣的果報，並能淨化累世罪業。</p>
+        <p>止惡修善的基礎，是遮止十不善業，包括身三業：殺生、偷盜、邪淫；語四業：妄語、離間語、粗惡語、綺語；意三業：貪、瞋、邪見。日常生活中所遇到的一切境界，都可以安置在修行中觀察。當情緒、煩惱、痛苦生起時，要提醒自己以佛法來轉化。若不知道如何修，往往是因為缺乏聞法的內涵。因此，修行應從斷除十不善業開始，進一步持戒、修死無常、觀空性，並透過隨喜善行、參與救災、放生、集資淨罪、念三十五佛、百字明咒與頂禮等方式，懺悔累世罪業，累積福德資糧。</p>
+        <p>接著進入共中士道。偈頌中說：「受用無厭眾苦門，不可保見過患已，當希求信三有樂，解脫妙樂願加持。」這段主要說明佛陀初轉法輪所宣說的四聖諦，也是學佛法的根本原因：為了求解脫，脫離輪迴，最後成佛。前兩句指出苦諦與集諦。三界輪迴中沒有究竟的快樂，所有快樂都是有漏之樂，眾生都在苦苦、壞苦、行苦中被逼迫，無論貧富皆受生老病死所折磨。「不可保見過患已」則說明苦的來源是集諦，也就是過去所造的業與煩惱。若能看見三界之樂並不可靠，就會對三有生起厭離，進而希求超越三界的解脫妙樂，也就是滅諦。要證得滅諦，必須透過聞思修增長智慧，對治相續中的煩惱障，才能得到解脫。</p>
+        <p>今日課程正式進入《抉擇解脫道體》：「清淨意樂所求發，正念正知不放逸，聖教根本別解脫，修為堅實祈加持。」若想脫離輪迴之苦，首先要逐漸放下對今世與來世的貪執。人對財物、家人與人間享樂有許多執著，但這些都不是究竟安樂，最後仍會帶來痛苦。透過這樣觀察，慢慢對三界有漏之樂生起厭倦之心，這就是出離心。出離心不是短暫一兩天，而是內心長久、強烈地想脫離輪迴，這就是「清淨意樂所求發」。</p>
+        <p>在出離心的基礎上，修行人要具備正念、正知與不放逸。正念，是憶持從傳承上師座下所聽聞的善法、道次第與觀修思路；正知，是透過出離心將所聞佛法再三憶念，以理智觀察自己的身口意，判斷是否落入煩惱，並以佛法對治內心。透過正念正知，讓身口意三門所作、所說、所想都依善法而行，不讓三門造作不善，並藉由聞思修提升修行。</p>
+        <p>修行也需要良好的所依。畜生道因缺乏思惟能力，難以修行；人道雖具備思惟能力，但仍需福德資糧，才能相信佛法、修持佛法。最殊勝的修行所依，是相續中具備別解脫戒，也就是以出家、受戒為基礎修行。若能持戒，修行會更加穩固，累積資糧也更迅速。</p>
+        <p>戒可分為律儀戒、攝善法戒、饒益有情戒。律儀戒是遮止惡行，如持守出家戒、比丘戒、菩薩戒、密乘戒等；攝善法戒是依戒的基礎行十善、布施等善法，使善法增長；饒益有情戒則是以利益一切眾生為動機，不是為了自己，而是為了幫助眾生脫離煩惱障與所知障。以戒為根本、依止上師而修，能使修行更堅固、更有力，資糧也能加倍增長。</p>
+        <p>共中士道的正知正念，主要是修四聖諦。四聖諦為苦諦、集諦、滅諦、道諦，每一諦各有四種行相，共十六行相。苦諦有無常、苦、空、無我四相。眾生因無明與習氣深重，容易顛倒認知，把苦認為樂，把不淨認為清淨，把無常認為常，把無我認為有我。譬如吸毒的人雖然知道毒品有害，卻仍執著其中的短暫快樂。佛陀教導，一切有為法都是剎那生滅，都是無常；生老病死與三苦逼迫，本質上都是苦。中觀應成派認為所謂「我」，不是常一自在、獨立實有的我，而是依靠五蘊、因果、身心而安立，因此是無我。</p>
+        <p>集諦是苦的因，包含因相、集相、生相、緣相四相。苦不是無因而生，而是由業與煩惱累積而來。眾生在輪迴中受苦，又不斷造新業，使輪迴相續不斷。若想斷除痛苦，應將苦的因連根拔起，從根本斷除業與煩惱。</p>
+        <p>滅諦是遠離痛苦的寂靜境界，具有滅、淨、妙、離四相。證得滅諦後，煩惱與痛苦不再生起，能遠離三界輪迴，逐漸趨近解脫與涅槃。有人誤認為解脫不存在，或某些外道誤以為修禪就是解脫，實際上仍屬有漏，仍未真正出離輪迴。佛教認為，真正的涅槃與寂靜相是存在的，但必須透過道諦實修才能證得。</p>
+        <p>道諦的四相有道相、如理相、行相、出相。道與道諦不同：凡夫所修稱為道，聖者所證才是道諦。道諦是能真正對治煩惱的正確道路；如理相是依正確理論與推理斷除內心煩惱；行相是心不顛倒，能依正見而行；出相則是依道修行而逐漸出離輪迴，趨向涅槃果位。</p>
+        <p>因此，佛陀初轉法輪所教導的核心，就是知苦、斷集、證滅、修道。要先認識痛苦的本質，再斷除痛苦的因；知道滅諦是真正可證得的解脫，並透過道諦實修而達成。若能在正念、正知、不放逸的狀態下修行，尤其以戒為根本，修行會更加堅實。即使是在家眾，只要真正了解佛法並實修，也能遠離三惡趣，逐漸接近道諦與滅諦，在內心種下出離輪迴的習氣。</p>
+        <p>最後，課程進入上士道的開端。大乘佛法不應只為自己解脫而修，而要想到一切眾生。自己因業與煩惱而受苦，自己的父母、累世父母與一切有情也同樣如此，而且他們尚未覺察，仍不斷在輪迴中受苦。因此，應發起強烈菩提心：為了利益一切有情，自己必須先實修、證得佛果，才有能力度化眾生。</p>
+        <p>上士道的修行永遠離不開大悲心與大慈心，這是大乘修行中不可缺少的方便法門。思惟一切眾生在無數生中都曾作為慈母愛護自己，因此今生即使不認識對方，也不應傷害他們，而應以佛法的認知報答過去的恩德，發心利益一切有情。</p>
+      </div>
+    </div>
+
+    <!-- 第四堂 -->
+    <div class="section" id="s4">
+      <div class="section-header">
+        <div class="tag">共上士道・顯宗修行</div>
+        <h2>第四堂課</h2>
+        <div class="date">上課日期：115/5/4　主講：遠登格西</div>
+      </div>
+      <div class="verse-box">
+        <div class="verse-label">【修菩提心】（延續第三堂課，本堂深入講解）</div>
+        <div class="verse-text">如自沉沒三有海，慈母眾生悉如是，見己荷度眾生擔，修為堅實祈加持。</div>
+      </div>
+      <div class="verse-box">
+        <div class="verse-label">【發心後行菩薩・顯宗共同行修法】</div>
+        <div class="verse-text">發心若不學三戒，當知定不證菩提，故應勤發大精進，學菩提戒祈加持。</div>
+      </div>
+      <div class="prose">
+        <p>本堂課首先談《上士道》菩提心的生起，必須建立在穩固的大慈心與大悲心之上，這也是大乘修行者最基本需要具備的門檻。大悲心是不分親疏怨親，平等希望一切眾生離開輪迴與痛苦，最終成佛。大慈心是由衷希望一切眾生獲得安樂與幸福，乃至究竟圓滿的佛果。當內心對一切眾生離苦得樂的願望非常深刻且穩定時，才有可能真正生起菩提心。</p>
+        <p>若心續中已真實生起菩提心，便正式進入菩薩道。菩薩道首先從資糧道開始，分為下、中、上三品；之後進入加行道，加行道又分為煖位、頂位、忍位、世第一法位。此階段雖仍屬凡夫菩薩，尚未直接現證空性，但已透過長期修習慈悲、菩提心與空性觀，逐漸接近聖者境界。</p>
+        <p>若進一步以智慧直接現證無我與空性，同時不離慈悲與菩提心，便能進入「見道位」，見道可分為幾個階段：見道的無間道、解脫道、後得智、以及非前二者的根本定，這些階段稱之為初地菩薩，成為真正親見空性的聖者菩薩，超越凡夫位。之後進入「修道位」，細分就有第二地菩薩至十地菩薩，期間持續對治內心深細的煩惱障以及所知障。</p>
+        <p>以中觀應成派思想來論：在見道與修道過程中，見道菩薩透過無間道與解脫道不斷斷除遍計煩惱：無間道是正在直接對治煩惱的智，解脫道則是煩惱已被斷除後所安住的狀態。此外，菩薩也會於後得位中，在出定後繼續以慈悲與智慧利益眾生。</p>
+        <p>菩薩修道時，主要對治俱生煩惱障與所知障。初地開始斷除粗品煩惱，隨著地地增上，障礙也越來越細微；一般而言，七地菩薩的煩惱障已徹底斷除，之後進入第八至第十地則更進一步對治更深細的所知障與習氣。這些習氣如同桌上拿走的大蒜，雖然蒜已不在，但氣味仍殘留。粗細煩惱如蒜頭本身，而細所知障微習氣則如殘留氣味。直到最後連最細微的氣味都完全清淨，內心再無任何障礙與殘餘習氣時，才是真正圓滿成佛。</p>
+        <p>接著談「行」修學菩提心，主要有兩種修心方式：一是寂天菩薩《入菩薩行論》所說的「自他相換」，二是阿底峽尊者傳承的「七支因果」。自他相換，是將平日最愛惜自己的心，轉而用來愛護眾生，把他人的痛苦視為自己承擔，自己的快樂則願意分享給他人，甚至願意犧牲自身利益去救護眾生。把愛我執徹底變成愛他執，這種修法需要極強的智慧，一般凡夫對親人尚且較容易做到，但若要對敵人生起同樣的心非常困難，因此能具有真正自他相換心者，多屬利根菩薩。</p>
+        <p>而鈍根菩薩則以依七支因果次第修學菩提心，相對來說更相應修。首先修平等心，去除親疏怨親的偏見，接著觀修一切眾生皆曾做過自己的母親，由知母、念恩、報恩，逐漸生起希望眾生得樂的大慈心，以及見眾生受苦便想救護的大悲心。之後進一步生起「我自己親自一定要去救度眾生」的增上意樂，最後成就「為利有情願成佛」的菩提心。</p>
+        <p>當修行者真正在心續中生起菩提心，顯教中主要以六度波羅蜜作為修行核心，包括布施、持戒、忍辱、精進、靜慮與智慧。密乘則是在這樣的基礎上，以無上密法作為修生起次第與圓滿次第方能更迅速成佛。</p>
+        <p>六度波羅蜜首先是布施，因為廣大的布施能累積福德資糧。「持戒」重要的原因是唯有持戒才能使善業延續，來世能繼續值遇正法而不墮惡趣。《功德之本》中提到：「發心若不學三戒，當知定不證菩提。」因此發菩提心後，要學習三種戒律：律儀戒、攝善法戒、饒益有情戒。律儀戒重在守護身語意三門，遠離十不善；攝善法戒是積極修集善法；饒益有情戒則是以實際行動利益眾生。以菩提心攝持六度修行，功德會迅速增長，並能生生世世持續累積成佛資糧，將來能夠利益一切有情眾生。</p>
+        <p>修持六度波羅蜜中，「忍辱」尤其重要。因為即使累積許多福德，若瞋恨心強烈，也可能如「火燒功德林」般毀壞善根。瞋恨被視為最毒的煩惱，因此修行人應特別學習克制情緒、守護內心。《入菩薩行論》提到，若未回向的善根，可能因瞋心而受損，因此每次修善後都應將功德回向一切眾生離苦得樂，乃至回向究竟佛果位。《普賢行願品》有八句偈頌被稱為回向之王：「文殊師利勇猛智，普賢慧行亦復然，我今回向諸善根，隨彼一切常修學。三世諸佛所稱歎，如是最勝諸大願，我今回向諸善根，為得普賢殊勝行。」</p>
+        <p>精進不同於一般努力，佛法中的精進，是對善法生起歡喜心而持續修學，因此不易感到疲累。靜慮是令心專注於一境而不散亂，無論觀佛像、本尊、光明、花朵，或專注於空性、人無我與法無我，皆屬修習靜慮。六度中的智慧，則是觀普特伽羅無我與法無我的般若智慧，用以對治相續中的煩惱障與所知障。</p>
+      </div>
+    </div>
+
+    <!-- 第五堂 -->
+    <div class="section" id="s5">
+      <div class="section-header">
+        <div class="tag">共上士道・般若止觀</div>
+        <h2>第五堂課</h2>
+        <div class="date">上課日期：115/5/18　主講：遠登格西</div>
+      </div>
+      <div class="verse-box">
+        <div class="verse-label">【般若最後兩者修行法・止觀】</div>
+        <div class="verse-text">散馳邪境令寂滅，如理觀察真實義，疾止妙觀雙運道，速當生起願加持。</div>
+      </div>
+      <div class="prose">
+        <p>本堂課主要講解上士道《般若最後二者修行法：止觀》，包括止（奢摩他）與觀（毘婆舍那）的修行。止屬於般若第五靜慮般若波羅蜜多；觀則屬於般若第六智慧般若波羅蜜多。止在藏文中有「熄滅」之意，「熄」是消滅、去除，「滅」則是安住，也就是將散亂、無明的心熄除，安住於善法當中。觀則是在止的基礎上，如理觀察諸法的真實義。止觀不只是大乘佛法有，小乘與其他宗教同樣也有止觀修行。</p>
+        <p>修止最重要的內容是「九住心」，依序為：內住、續住、安住、近住、調伏、寂靜、最寂靜、專注一境、平等住。修止最大的障礙是沈沒與掉舉，而且其中還有許多粗細不同的層次。此外，修止有五種過患：懈怠、忘念聖言、沈沒掉舉、不作行、作行。懈怠是指不想修行、不想學佛、不想修三摩地；忘念聖言則是打坐的時候不記得善知識講的坐禪教授。沈沒是精神無法集中、昏沉欲睡，心不清晰；掉舉則是心向外攀緣，想很多事情，無法安住於善法或禪坐的所緣境上。不作行是心已離開善所緣境，卻不去對治；作行則是明明已經沒有沈沒掉舉的阻礙，卻仍刻意過度對治。</p>
+        <p>彌勒菩薩於《辨中邊論》中說：「為滅五過失，勤修八斷行。懈怠、忘失教授，及昏沉掉舉、不作行、作行，是為五過失。」要滅除五過患，需要修八斷行來對治。對治懈怠，需要先對三摩地功德生起信心，進而產生希求，再生起精進，最後令身心達到輕安。對治忘失教言需起想起所緣的念。對治沈沒需依靠正念，對治掉舉則需要依靠正知。對治作行，即便是沒有沉掉時還刻意對治沉掉，理應放棄當下的作意。</p>
+        <p>「散馳邪境令寂滅，如理觀察真實義，寂止妙觀雙運道，速當生起願加持。」當內心散亂、鬆散時，容易對法產生邪見。本來一切法皆無自性，但因顛倒認知而執著為諦實有，因此需要透過正知正見去熄滅錯誤認知。「令寂滅」講的是止；「如理觀察真實義」則是觀，也就是在止的基礎上觀察法的真實本質。許多法並不像表面看到的那樣存在，例如現代AI製作的短影片，雖然眼前看起來像真人、聲音也完全一樣，但其實並不是真人。透過止與觀，才能真正分辨顯現是否符合真實。</p>
+        <p>煩惱障無法單靠慈悲心真正斷除，必須依靠空證見，通達人無我與法無我的智慧，才能真正斷除煩惱障等而成佛。因此止與觀必須雙運。止是讓心安住、停住；妙觀則是如法如理地觀察萬法本質與真理，兩者互相配合修行，才能斷除煩惱障。</p>
+        <p>修止可以依不同方法練習，例如貪欲強者以修不淨觀；恐懼心、缺乏安全感者可以修慈悲觀；傲慢者則修因緣觀與界分別觀；欲斷煩惱障者則修人無我、法無我等空性觀。念佛觀則是觀想佛的色身相好莊嚴，既能幫助熄除煩惱障與業障，引發光明正面的力量，特別適合業障較重者修持。</p>
+        <p>關於打坐的準備：打坐墊子宜後高前低，較容易久坐。打坐時須端身挺直、金剛跏趺坐姿，雙手交結三摩地手印後放置於肚臍，舌頂上顎，雙眼微張朝鼻尖方向，但不是刻意盯著鼻尖。齒唇自然放鬆，頭部自然放鬆不上仰，如此呼吸較自然，也較不容易口乾。</p>
+        <p>念佛觀：觀想約大拇指大小的釋迦牟尼佛，在眉間前方兩尺左右，佛像亮晶晶、晶瑩剔透，極為莊嚴且放射光芒。觀修時間不需太長，可先從一分鐘開始，短時間可以次數多，穩定了再逐漸延長，並可將所緣境移至心間、肚臍、左肩、右肩方式靜坐觀。修觀時最容易出現的障礙仍然是沈沒與掉舉。</p>
+        <p>九住心詳說：第一內住，是將心安住於佛像，不再攀緣外境五欲，如同蜜蜂剛進入花蕊，還停不久，屬於六力中的聽聞力。第二續住，是即使妄念仍多，也能繼續將心拉回所緣境，如蜜蜂已能停在花上一小段時間，屬於思惟力。第三安住，逐漸習慣讓心安住所緣，即使散亂也能立刻察覺並重新安住，由意念力成辦。第四近住，提升起強烈正念，反覆讓心安住所緣，此時會出現沉與掉，需要強的正念不斷思惟三摩地功德。第五調伏，透過強烈正知，開始感受到三摩地功德與歡喜心，已無粗分沉沒的危險，由正知力成辦。第六寂靜，依靠更強的正知，察覺極細微的掉舉並立刻對治。第七最寂靜，心向內強烈收攝時，論中說會出現五欲貪著、昏沉等障礙，亦能透過精進力克服，昏沉是因，沈沒是果。第八專注一境，幾乎已完全克服沈沒與掉舉，可以長時間穩定專注，沈沒與掉舉如仇敵失去破壞力，由精進力成辦。第九平等住，身心完全輕安，不再疲累，只要一入定就能長時間安住於所緣境，真正達到止的境界，由串習力成辦。</p>
+        <p>最後提到止觀雙運，是將心專注於所緣境後，再進一步觀察其本質究竟是自性有或自性無，最終安住於無自性的本質而觀修。比喻如魚在清澈的水中自由游動，卻不令水面生起波浪。希望透過諸佛菩薩與傳承上師的加持，依靠法義證得止觀雙運，最終斷除煩惱障。</p>
+      </div>
+    </div>
+
+    <!-- 第六堂 -->
+    <div class="section" id="s6">
+      <div class="section-header">
+        <div class="tag">密宗修行・祈願發願</div>
+        <h2>第六堂課</h2>
+        <div class="date">上課日期：115/5/25　主講：遠登格西</div>
+      </div>
+      <div class="verse-box">
+        <div class="verse-label">【容續器修密受四灌頂入金剛乘】</div>
+        <div class="verse-text">善修共道成法器，乘中最勝金剛乘，諸善丈夫勝道階，順利趨入祈加持。</div>
+      </div>
+      <div class="verse-box">
+        <div class="verse-label">【受灌頂時承諾誓言及戒律如何清淨】</div>
+        <div class="verse-text">爾時二種成就本，謂獲淨律三昧耶，願獲真實決定解，捨命守護祈加持。</div>
+      </div>
+      <div class="verse-box">
+        <div class="verse-label">【持戒後如何修二次第法】</div>
+        <div class="verse-text">次正通達續部心（要），二次宗要善勤習，四座瑜伽不放漫，如師教修願加持。</div>
+      </div>
+      <div class="verse-box">
+        <div class="verse-label">【祈願修道順緣成就違緣消滅】</div>
+        <div class="verse-text">願說如是妙道師，及正修伴堅固住，內外一切諸障礙，速疾息滅祈加持。</div>
+      </div>
+      <div class="verse-box">
+        <div class="verse-label">【發願永不離師及求證果位】</div>
+        <div class="verse-text">祈願生生不離師，善師受用正法樂，圓滿道地諸功德，速證勝位金剛持。</div>
+      </div>
+      <div class="prose">
+        <p>複習之前課的主要思想：下士道重視業果與避免墮入三惡道，中士道進一步思惟輪迴皆苦，生起出離心，希望脫離三界輪迴。上士道則體會一切眾生皆曾作過自己的母親，皆希望離苦得樂，因此發起菩提心，希望自己先成佛，再廣度一切有情。若修行只是為了自己或少數親友，仍夾雜我執與我所執；真正清淨的大乘修行，必須以菩提心為動機，並以空正見觀察一切法皆為因緣和合、無自性而存在，再以此心修持六度萬行。</p>
+        <p>顯教認為成佛需經無數三大阿僧祇劫累積福慧資糧，斷除煩惱障與所知障。密乘則建立在出離心、菩提心與空正見的基礎上，透過特殊善巧方便快速累積資糧、淨除障礙，無需無數的劫也可成佛，因此被稱為即生成佛之道。若今生未能成佛，也有機會於較短世數中圓滿佛果。修持密法的目的並非追求個人利益，而是希望更迅速獲得成佛的能力，以利益一切眾生。</p>
+        <p>密乘的修學可分為三個重點：首先需受四灌頂，成為具格法器，正式進入金剛乘；其次需清淨守護三昧耶戒與各種誓言承諾；最後依次修學升起次第與圓滿次第。唯有在灌頂、戒律與誓言的基礎上，才能真正進入密續修行，最終證得金剛持果位。</p>
+        <p>佛陀說法有共通傳承與特殊傳承兩種方式。四聖諦屬於共通傳承；般若經典與密續則是依不同根器眾生而宣說的深廣教法。《心經》所闡述的空性義理，後來經由龍樹菩薩及歷代祖師以教證與理證建立其為佛說的正統地位，大乘與密續的教法亦因此獲得完整弘揚。</p>
+        <p>密法的核心在於從內心獲得真正的救護，也就是逐步將凡夫心轉化為佛的智慧與功德。凡夫流轉輪迴的根本原因，在於執著自我與外境真實存在，由此生起貪、瞋、癡等煩惱。密乘修行的重點，便是在空正見的基礎上，逐步去除這些執著，使心續轉變為佛的心續。</p>
+        <p>成佛必須圓滿福德資糧與智慧資糧。智慧資糧來自於觀修人無我與法無我，透過空性的智慧淨除我執與法執，最終成就佛的法身。福德資糧則來自於菩提心、大悲心、大慈心以及布施、持戒、忍辱等利他行持，透過利益眾生而累積廣大福德，最終成就佛的色身，具足三十二相、八十種隨好。福慧二資糧究竟圓滿時，即證得佛果，密乘則稱為金剛持果位。</p>
+        <p>顯密皆承認心識具有粗細不同層次。依靠眼耳鼻舌身等五根而生起的認知屬於粗分心；夢境、記憶等屬於較細微的心；死亡時現起的光明心則是最細微的心識。密乘特別重視最細微光明心的修持，認為此心本身具有成佛的潛能。若能在光明心現起時保持空正見，便有機會現證空性，因此無上瑜伽密續特別重視此類修法。有些高僧大德圓寂後身體多日不壞，也被視為仍安住於最細微光明心修持的狀態。</p>
+        <p>升起次第透過觀想本尊淨相，逐步去除凡夫執著，並觀修本尊、上師與自心三者無二無別。自心即本尊，本尊即上師，三者本質皆安住於空性之中。透過不斷串習，使凡夫的身、語、意逐漸轉化為佛的身、語、意。圓滿次第則進一步修持氣、脈、明點，使風入中脈、住中脈、融中脈，開啟最細微的光明心。</p>
+        <p>當具生原始光明與空正見結合時，便能從根本淨除煩惱障與所知障。唯有無上瑜伽密續才完整宣說升起次第與圓滿次第。於「基法」上懂得所謂的三身——基色身、基法身、基報身，有了基三身，才能透過道三身，獲得究竟果三身。特別是生起次第中，將死有轉化為法身道用、將中有轉化為報身道用、將生有轉化為化身道用來修行，這種三身轉道用的修行極為重要。</p>
+        <p>三昧耶戒與密乘戒律是一切成就之根本，如同大樹依靠根系而成長，密乘功德亦依靠清淨律儀而增長。若能清淨守護戒律與誓言，便能獲得殊勝成就；若毀犯誓言，則將嚴重障礙修行。因此即使面臨生命危險，也應盡力守護三昧耶戒。</p>
+        <p>持戒之後，需精勤修學升起次第與圓滿次第，並依止上師教導持續串習。灌頂後的日常功課不可隨意中斷，應於晝夜四座瑜伽中持續修持，令心續逐漸成熟，最終成辦圓滿次第的證量。</p>
+        <p>修學佛法需依止善知識，依照傳承教法堅定實修，並祈願內外障礙迅速消除。外在違緣包括環境與人事障礙，內在違緣則包括煩惱、懈怠與退失信心等。最終將一切善根回向無上佛果，祈願生生世世不離善知識，常聞正法、受用法樂，早日圓滿菩薩道功德，證得金剛持果位，並願一切眾生同證佛果。</p>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<script>
+  function show(id, btn) {
+    document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+    document.querySelectorAll('.sidebar nav button').forEach(b => b.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    btn.classList.add('active');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+</script>
+
+</body>
+</html>
