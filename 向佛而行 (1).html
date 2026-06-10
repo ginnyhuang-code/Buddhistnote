@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>向佛而行・依師聞法・修學筆記</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #fafaf8;
+    --bg-secondary: #f3f2ee;
+    --text-primary: #1a1a18;
+    --text-secondary: #555550;
+    --text-tertiary: #999990;
+    --border: rgba(0,0,0,0.1);
+    --border-hover: rgba(0,0,0,0.2);
+    --radius-md: 8px;
+    --radius-lg: 12px;
+    --font-sans: -apple-system, BlinkMacSystemFont, "PingFang TC", "Noto Sans TC", "Microsoft JhengHei", sans-serif;
+    --font-serif: "Georgia", "Noto Serif TC", "Source Han Serif TC", serif;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #181816;
+      --bg-secondary: #222220;
+      --text-primary: #f0f0ec;
+      --text-secondary: #aaaaaa;
+      --text-tertiary: #666660;
+      --border: rgba(255,255,255,0.1);
+      --border-hover: rgba(255,255,255,0.2);
+    }
+  }
+
+  body {
+    background: var(--bg);
+    color: var(--text-primary);
+    font-family: var(--font-sans);
+    font-size: 16px;
+    line-height: 1.7;
+    min-height: 100vh;
+  }
+
+  .site {
+    max-width: 820px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem;
+  }
+
+  /* Nav */
+  nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 1.5rem;
+    border-bottom: 0.5px solid var(--border);
+    margin-bottom: 2.5rem;
+  }
+
+  .nav-logo { cursor: pointer; text-decoration: none; }
+  .nav-logo-main { font-size: 16px; font-weight: 500; color: var(--text-primary); letter-spacing: .06em; }
+  .nav-logo-sub { font-size: 11px; color: var(--text-tertiary); letter-spacing: .04em; margin-top: 2px; }
+
+  .nav-links { display: flex; gap: 1.5rem; flex-wrap: wrap; }
+  .nav-links a {
+    font-size: 13px;
+    color: var(--text-secondary);
+    text-decoration: none;
+    cursor: pointer;
+    background: none;
+    border: none;
+    padding: 0;
+    font-family: var(--font-sans);
+  }
+  .nav-links a:hover { color: var(--text-primary); }
+
+  /* Pages */
+  .page { display: none; }
+  .page.active { display: block; }
+
+  .back-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    color: var(--text-secondary);
+    cursor: pointer;
+    background: none;
+    border: none;
+    padding: 0;
+    margin-bottom: 2rem;
+    font-family: var(--font-sans);
+  }
+  .back-btn:hover { color: var(--text-primary); }
+  .back-btn::before { content: "←"; font-size: 14px; }
+
+  /* Hero */
+  .hero {
+    text-align: center;
+    padding: 2.5rem 0 3rem;
+  }
+  .hero h1 {
+    font-size: 28px;
+    font-weight: 500;
+    color: var(--text-primary);
+    letter-spacing: .08em;
+    margin-bottom: .5rem;
+  }
+  .hero-sub {
+    font-size: 13px;
+    color: var(--text-tertiary);
+    letter-spacing: .06em;
+    margin-bottom: .75rem;
+  }
+  .hero-line {
+    width: 36px;
+    height: 1px;
+    background: var(--border-hover);
+    margin: 1.5rem auto;
+  }
+  .hero p {
+    font-size: 14px;
+    color: var(--text-secondary);
+    line-height: 1.8;
+    max-width: 380px;
+    margin: 0 auto;
+  }
+
+  /* Category grid */
+  .cat-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-top: .5rem;
+  }
+  @media (max-width: 520px) {
+    .cat-grid { grid-template-columns: 1fr; }
+  }
+
+  .cat-card {
+    background: var(--bg);
+    border: 0.5px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 1.5rem 1.25rem;
+    cursor: pointer;
+    transition: border-color .15s;
+  }
+  .cat-card:hover { border-color: var(--border-hover); }
+  .cat-card-icon { font-size: 18px; color: var(--text-tertiary); margin-bottom: .75rem; }
+  .cat-card h3 { font-size: 15px; font-weight: 500; color: var(--text-primary); margin-bottom: .35rem; }
+  .cat-card p { font-size: 12px; color: var(--text-tertiary); line-height: 1.7; }
+  .cat-count { font-size: 11px; color: var(--text-tertiary); margin-top: .6rem; }
+
+  /* List page */
+  .list-header { margin-bottom: 2rem; }
+  .list-header h2 { font-size: 20px; font-weight: 500; color: var(--text-primary); margin-bottom: .4rem; }
+  .list-header p { font-size: 13px; color: var(--text-secondary); }
+
+  .note-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 1.1rem 0;
+    border-bottom: 0.5px solid var(--border);
+    cursor: pointer;
+  }
+  .note-item:hover .note-title { color: var(--text-secondary); }
+  .note-title { font-size: 15px; font-weight: 500; color: var(--text-primary); margin-bottom: .3rem; transition: color .15s; }
+  .note-excerpt { font-size: 13px; color: var(--text-tertiary); line-height: 1.6; max-width: 540px; }
+  .note-tag {
+    display: inline-block;
+    font-size: 11px;
+    color: var(--text-tertiary);
+    background: var(--bg-secondary);
+    border-radius: 4px;
+    padding: 2px 8px;
+    margin-top: .45rem;
+  }
+  .note-date { font-size: 11px; color: var(--text-tertiary); white-space: nowrap; margin-left: 1rem; margin-top: 3px; }
+
+  /* Article page */
+  .article { max-width: 660px; margin: 0 auto; }
+  .article-tag { font-size: 11px; color: var(--text-tertiary); letter-spacing: .08em; margin-bottom: .75rem; }
+  .article h1 { font-size: 22px; font-weight: 500; color: var(--text-primary); line-height: 1.4; margin-bottom: .75rem; }
+  .article-meta {
+    font-size: 12px;
+    color: var(--text-tertiary);
+    padding-bottom: 1.75rem;
+    border-bottom: 0.5px solid var(--border);
+    margin-bottom: 2rem;
+  }
+  .article-body p { font-size: 15px; color: var(--text-primary); line-height: 1.95; margin-bottom: 1.4rem; }
+  .article-body h2 { font-size: 16px; font-weight: 500; color: var(--text-primary); margin: 2rem 0 .7rem; }
+  .article-body blockquote {
+    border-left: 2px solid var(--border-hover);
+    padding-left: 1.2rem;
+    margin: 1.5rem 0;
+    color: var(--text-secondary);
+    font-family: var(--font-serif);
+    font-size: 14px;
+    line-height: 1.9;
+  }
+
+  .gatha-box {
+    background: var(--bg-secondary);
+    border-radius: var(--radius-md);
+    padding: 1rem 1.25rem;
+    margin: 1.5rem 0;
+  }
+  .gatha-box p {
+    font-size: 14px;
+    color: var(--text-secondary);
+    line-height: 1.9;
+    margin: 0;
+    font-family: var(--font-serif);
+  }
+
+  .section-tag {
+    display: inline-block;
+    font-size: 11px;
+    color: var(--text-tertiary);
+    background: var(--bg-secondary);
+    border-radius: 4px;
+    padding: 2px 8px;
+    margin-bottom: .6rem;
+  }
+
+  .empty-state {
+    font-size: 14px;
+    color: var(--text-tertiary);
+    padding: 2rem 0;
+  }
+
+  /* Footer */
+  footer {
+    margin-top: 4rem;
+    padding-top: 1.5rem;
+    border-top: 0.5px solid var(--border);
+    text-align: center;
+    font-size: 12px;
+    color: var(--text-tertiary);
+  }
+</style>
+</head>
+<body>
+<div class="site">
+
+  <nav>
+    <div class="nav-logo" onclick="showPage('home')">
+      <div class="nav-logo-main">向佛而行</div>
+      <div class="nav-logo-sub">依師聞法・修學筆記</div>
+    </div>
+    <div class="nav-links">
+      <a onclick="showPage('home')">首頁</a>
+      <a onclick="showCat('功德之本')">功德之本</a>
+      <a onclick="showCat('菩提道次第略論')">菩提道次第略論</a>
+    </div>
+  </nav>
+
+  <!-- 首頁 -->
+  <div id="page-home" class="page active">
+    <div class="hero">
+      <h1>向佛而行</h1>
+      <div class="hero-sub">依師聞法・修學筆記</div>
+      <div class="hero-line"></div>
+      <p>記錄跟隨善知識聽聞佛法的點滴<br>願這些文字對修學者有所助益</p>
+    </div>
+    <div class="cat-grid">
+      <div class="cat-card" onclick="showCat('功德之本')">
+        <div class="cat-card-icon">📜</div>
+        <h3>功德之本</h3>
+        <p>宗喀巴大師著，含原文與遠登格西六堂課講授筆記</p>
+        <div class="cat-count">7 篇（原文 + 6 堂課）</div>
+      </div>
+      <div class="cat-card" onclick="showCat('菩提道次第略論')">
+        <div class="cat-card-icon">📖</div>
+        <h3>菩提道次第略論</h3>
+        <p>宗喀巴大師著，道次第修行要義筆記</p>
+        <div class="cat-count">即將新增</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 筆記列表 -->
+  <div id="page-list" class="page">
+    <button class="back-btn" onclick="showPage('home')">返回首頁</button>
+    <div class="list-header">
+      <h2 id="list-title"></h2>
+      <p id="list-desc"></p>
+    </div>
+    <div id="note-list"></div>
+  </div>
+
+  <!-- 單篇文章 -->
+  <div id="page-article" class="page">
+    <button class="back-btn" onclick="goBackToList()"><span id="back-label">返回列表</span></button>
+    <div class="article">
+      <div id="article-content"></div>
+    </div>
+  </div>
+
+  <footer>
+    向佛而行・依師聞法・修學筆記
+  </footer>
+
+</div>
+
+<script>
+const data = {
+  '功德之本': {
+    desc: '宗喀巴大師著・法尊法師譯・遠登格西講授',
+    notes: [
+      {
+        id:'gd0', title:'《功德之本》原文', date:'宗喀巴大師著・法尊法師譯',
+        excerpt:'諸功德本謂如理，依止恩師是道基……涵蓋道次第與密法，從依止善知識至金剛持果位的完整偈頌。',
+        tag:'原文',
+        content:`
+          <div class="section-tag">前行（2偈）</div>
+          <div class="gatha-box"><p>【道之根本～依止善知識】<br>諸功德本謂如理，依止恩師是道基，善了知己多策勵，恭敬親近祈加持。<br><br>【暇身義大勸受心要】<br>偶一得此暇滿身，知極難得具大義，遍諸晝夜恒無間，生取堅心願加持。</p></div>
+          <div class="section-tag">共下士道（2偈）</div>
+          <div class="gatha-box"><p>【念死無常及黑白業果】<br>身命動搖如水泡，速疾壞滅當念死，死後如影隨於形，黑白業果恆隨逐。<br><br>【止惡修善】<br>獲定解已於罪聚，雖諸小罪亦應除，勤修一切妙善聚，常不放逸祈加持。</p></div>
+          <div class="section-tag">共中士道（2偈）</div>
+          <div class="gatha-box"><p>【見三有過患生取解脫心】<br>受用無厭眾苦門，不可保見過患已，當希求信三有樂，解脫妙樂願加持。<br><br>【抉擇解脫道體】<br>清淨意樂所求發，正念正知不放逸，聖教根本別解脫，修為堅實祈加持。</p></div>
+          <div class="section-tag">共上士道（6偈）</div>
+          <div class="gatha-box"><p>【修菩提心】<br>如自沉沒三有海，慈母眾生悉如是，見己荷度眾生擔，修為堅實祈加持。<br><br>【顯宗共同行修法】<br>發心若不學三戒，當知定不證菩提，故應勤發大精進，學菩提戒祈加持。<br><br>【般若止觀修行法】<br>散馳邪境令寂滅，如理觀察真實義，疾止妙觀雙運道，速當生起願加持。<br><br>【受四灌頂入金剛乘】<br>善修共道成法器，乘中最勝金剛乘，諸善丈夫勝道階，順利趨入祈加持。<br><br>【清淨三昧耶戒】<br>爾時二種成就本，謂獲淨律三昧耶，願獲真實決定解，捨命守護祈加持。<br><br>【修二次第法】<br>次正通達續部心（要），二次宗要善勤習，四座瑜伽不放漫，如師教修願加持。</p></div>
+          <div class="section-tag">祈願與發願（2偈）</div>
+          <div class="gatha-box"><p>願說如是妙道師，及正修伴堅固住，內外一切諸障礙，速疾息滅祈加持。<br><br>祈願生生不離師，善師受用正法樂，圓滿道地諸功德，速證勝位金剛持。</p></div>`
+      },
+      {
+        id:'gd1', title:'第一堂課：依止善知識與暇滿人身', date:'上課日期：115/4/13',
+        excerpt:'依止善知識為道之根本，一切功德皆從如理依師而生；暇滿人身極難得，應晝夜精進取心要。',
+        tag:'前行',
+        content:`
+          <div class="gatha-box"><p>諸功德本謂如理，依止恩師是道基，善了知己多策勵，恭敬親近祈加持。<br>偶一得此暇滿身，知極難得具大義，遍諸晝夜恒無間，生取堅心願加持。</p></div>
+          <h2>《功德之本》概述</h2>
+          <p>《功德之本》涵蓋從顯教到密續的修行層次，內容相當精華。若覺《菩提道次第廣論》廣大不易吸收，本偈可視為已整理好的精華，涵蓋廣論主要內容。在傳承中極為普遍，修行者多能背誦，甚至許多在家長者將其作為日常功課。</p>
+          <h2>依止善知識</h2>
+          <p>「諸功德本謂如理，依止恩師是道基。」一切功德之本在於如理認知，依止恩師為修行基礎。此處「功德」指能引導凡夫成佛的善法，包括資糧道、加行道、見道、修道與無學道，欲進入這些修行次第，皆須依止善知識。</p>
+          <p>善知識應具備戒、定、慧三學具足，智慧通達、內心寂靜，具慈悲心，善於說法且不厭倦弟子提問。真正的善知識，是能減輕我們內心煩惱、引導我們走向佛果的大乘善知識。</p>
+          <h2>暇滿人身</h2>
+          <p>得到暇滿人身應學會取捨善惡，其難得程度如大海中盲龜偶遇浮木之孔。八暇包括遠離地獄、餓鬼、畜生、邊地、長壽天、邪見、佛不出世與喑啞等狀態；十圓滿則包含生於有佛法之地、諸根具足、未造重罪、具信心，以及佛法住世、善知識存在等條件。</p>`
+      },
+      {
+        id:'gd2', title:'第二堂課：共下士道與共中士道入門', date:'上課日期：115/4/20',
+        excerpt:'念死無常、黑白業果、止惡修善，為共下士道要義；並引入共中士道，觀三界皆苦，希求解脫。',
+        tag:'共下士道・共中士道',
+        content:`
+          <div class="gatha-box"><p>身命動搖如水泡，速疾壞滅當念死，死後如影隨於形，黑白業果恆隨逐。<br>獲定解已於罪聚，雖諸小罪亦應除，勤修一切妙善聚，常不放逸祈加持。</p></div>
+          <h2>念死無常</h2>
+          <p>「身命動搖如水泡，速疾壞滅當念死。」生命剎那變化不定，應及早修學。死亡何時來臨並不確定，應持續提醒自己，每日從事與佛法相關修持，例如誦念本偈、思惟法義，以鞏固修行初心。</p>
+          <h2>業果</h2>
+          <p>「死後如影隨於形，黑白業果恆隨逐。」死亡時唯有業力隨身。黑白業果依成熟時間分三類：今生造業今生受報（順現法受業）、今生造業來世受報（順次生受業）、今生造業多世後成熟（順後受業）。</p>
+          <h2>止惡修善</h2>
+          <p>修行者需正確認識自己，不可將過失推諉於他人，能接受挫折源於自身錯誤，即為真實修行。十善業包含身三（不殺生、不偷盜、不邪淫）、語四（不妄語、不離間、不惡口、不綺語）、意三（不貪、不瞋、不邪見）。</p>
+          <h2>共中士道入門</h2>
+          <p>三界輪迴中無究竟快樂，眾生在苦苦、壞苦、行苦中被逼迫。三有（生有、死有、中有）之樂並不可靠，真正的樂需從解脫中尋得，前提必須生起出離心及精進心。</p>`
+      },
+      {
+        id:'gd3', title:'第三堂課：抉擇解脫道體與菩提心開端', date:'上課日期：115/4/25',
+        excerpt:'說明出離心的生起、別解脫戒的意義，以四聖諦為核心，並開始進入上士道菩提心的觀修。',
+        tag:'共中士道・共上士道',
+        content:`
+          <div class="gatha-box"><p>清淨意樂所求發，正念正知不放逸，聖教根本別解脫，修為堅實祈加持。<br><br>如自沉沒三有海，慈母眾生亦復然，見已荷負眾生擔，修為堅實祈加持。</p></div>
+          <h2>出離心</h2>
+          <p>出離心不是短暫一兩天，而是內心長久、強烈地想脫離輪迴。透過觀察三界有漏之樂的本質，慢慢生起厭倦，這就是「清淨意樂所求發」。</p>
+          <h2>四聖諦</h2>
+          <p>苦諦有無常、苦、空、無我四相。集諦是苦的因，包括因相、集相、生相、緣相。滅諦是遠離痛苦的寂靜境界，具滅、淨、妙、離四相。道諦的四相有道相、如理相、行相、出相。核心次第為：知苦、斷集、證滅、修道。</p>
+          <h2>別解脫戒</h2>
+          <p>戒可分為律儀戒（遮止惡行）、攝善法戒（積極修集善法）、饒益有情戒（以利益一切眾生為動機）。以戒為根本依止上師而修，能使修行更堅固，資糧也能加倍增長。</p>
+          <h2>菩提心的開端</h2>
+          <p>「如自沉沒三有海，慈母眾生亦復然。」自己因業與煩惱而受苦，一切如母有情也同樣沉沒輪迴之中，應承擔起度化眾生的責任，願自己速速成佛，再來利益一切眾生。</p>`
+      },
+      {
+        id:'gd4', title:'第四堂課：菩提心深入與六度波羅蜜', date:'上課日期：115/5/4',
+        excerpt:'深入講解菩提心的生起次第、七支因果與自他相換，以及六度波羅蜜的修行要義。',
+        tag:'共上士道・顯宗',
+        content:`
+          <div class="gatha-box"><p>發心若不學三戒，當知定不證菩提，故應勤發大精進，學菩提戒祈加持。</p></div>
+          <h2>菩提心生起次第</h2>
+          <p>修菩提心有兩種方式：一是寂天菩薩《入菩薩行論》所說的「自他相換」，適合利根菩薩。二是阿底峽尊者傳承的「七支因果」，從修平等心開始，由知母、念恩、報恩，逐漸生起大慈心、大悲心，再生起增上意樂，最後成就「為利有情願成佛」的菩提心，較適合鈍根菩薩次第修習。</p>
+          <h2>三種戒律</h2>
+          <p>「發心若不學三戒，當知定不證菩提。」發菩提心後，要學習律儀戒（守護身語意三門）、攝善法戒（積極修集善法）、饒益有情戒（以實際行動利益眾生）。</p>
+          <h2>六度波羅蜜</h2>
+          <p>佈施累積福德；持戒使善業延續；忍辱對治瞋恨，被視為最重要，如「火燒功德林」；精進是對善法生起歡喜心而持續修學；靜慮令心專注一境；智慧則是觀人無我與法無我的般若智慧，對治煩惱障與所知障。</p>
+          <blockquote>「文殊師利勇猛智，普賢慧行亦復然，我今回向諸善根，隨彼一切常修學。」——普賢行願品回向偈</blockquote>`
+      },
+      {
+        id:'gd5', title:'第五堂課：止觀修行與九住心', date:'上課日期：115/5/18',
+        excerpt:'詳解奢摩他（止）與毘婆舍那（觀）的修行，包括五過患、八斷行，以及九住心的完整說明。',
+        tag:'共上士道・顯宗止觀',
+        content:`
+          <div class="gatha-box"><p>散馳邪境令寂滅，如理觀察真實義，疾止妙觀雙運道，速當生起願加持。</p></div>
+          <h2>止與觀</h2>
+          <p>止（奢摩他）是將散亂的心熄除，安住於善法當中。觀（毘婆舍那）是在止的基礎上如理觀察諸法真實義。煩惱障無法單靠慈悲心斷除，必須依靠空證見，通達人無我與法無我的智慧，因此止與觀必須雙運。</p>
+          <h2>五過患與八斷行</h2>
+          <p>修止的五種過患：懈怠、忘念聖言、沈沒、掉舉、不作行與作行。八斷行對治：對治懈怠需先生起對三摩地的信心、希求、精進；對治忘失教言需起念；對治沉沒依正念；對治掉舉依正知；沒有沉掉時則捨棄多餘作意。</p>
+          <h2>九住心</h2>
+          <p>一、內住——將心安住於所緣境，聽聞力所成辦。二、續住——能將心拉回所緣，思惟力。三、安住——散亂後能立刻察覺重新安住，意念力。四、近住——提升強烈正念，對治細分沉掉，意念力。五、調伏——透過正知察覺細微沈沒，正知力。六、寂靜——察覺極細微掉舉並立刻對治。七、最寂靜——對治五欲貪著、昏沉等障礙，精進力。八、專注一境——幾乎完全克服沉掉，能自然輕鬆專注，精進力。九、平等住——身心完全輕安，一入定便能長時間安住所緣，串習力。</p>
+          <h2>打坐要點</h2>
+          <p>端身挺直、金剛跏趺坐，雙手交結三摩地手印置於肚臍，舌頂上顎，雙眼微張朝鼻尖方向。念佛觀可觀想大拇指大小的釋迦牟尼佛在眉間前方約兩尺處，亮晶晶、晶瑩剔透，從一分鐘開始短時多座修持。</p>`
+      },
+      {
+        id:'gd6', title:'第六堂課：密宗修行要義', date:'上課日期：115/5/25',
+        excerpt:'說明進入金剛乘的條件：受四灌頂、清淨三昧耶戒，以及升起次第與圓滿次第的修行要義。',
+        tag:'密宗',
+        content:`
+          <div class="gatha-box"><p>善修共道成法器，乘中最勝金剛乘，諸善丈夫勝道階，順利趨入祈加持。<br>爾時二種成就本，謂獲淨律三昧耶，願獲真實決定解，捨命守護祈加持。<br>次正通達續部心（要），二次宗要善勤習，四座瑜伽不放漫，如師教修願加持。</p></div>
+          <h2>密乘的殊勝</h2>
+          <p>密乘建立在出離心、菩提心與空正見的基礎上，透過特殊善巧方便快速累積資糧、淨除障礙，被稱為即生成佛之道。修持密法的目的是希望更迅速獲得成佛的能力，以利益一切眾生。</p>
+          <h2>受灌頂與三昧耶戒</h2>
+          <p>修學密法需先受四灌頂，成為具格法器。受灌頂後須清淨守護三昧耶戒，即使面臨生命危險也應盡力守護。三昧耶戒是一切成就之根本，如同大樹依靠根系而成長。</p>
+          <h2>升起次第與圓滿次第</h2>
+          <p>升起次第透過觀想本尊淨相，逐步去除凡夫執著，特別將死有轉化為法身道用、中有轉化為報身道用、生有轉化為化身道用。圓滿次第進一步修持氣、脈、明點，開啟最細微的光明心，當具生原始光明與空正見結合時，便能從根本淨除煩惱障與所知障。</p>
+          <h2>祈願迴向</h2>
+          <div class="gatha-box"><p>願說如是妙道師，及正修伴堅固住，內外一切諸障礙，速疾息滅祈加持。<br>祈願生生不離師，善師受用正法樂，圓滿道地諸功德，速證勝位金剛持。</p></div>`
+      }
+    ]
+  },
+  '菩提道次第略論': {
+    desc: '宗喀巴大師著，道次第修行要義',
+    notes: []
+  }
+};
+
+let currentCat = '功德之本';
+
+function showPage(id) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById('page-' + id).classList.add('active');
+  window.scrollTo(0, 0);
+}
+
+function showCat(cat) {
+  currentCat = cat;
+  const d = data[cat];
+  document.getElementById('list-title').textContent = cat;
+  document.getElementById('list-desc').textContent = d.desc;
+  const list = document.getElementById('note-list');
+  if (d.notes.length === 0) {
+    list.innerHTML = '<p class="empty-state">內容即將新增，敬請期待。</p>';
+  } else {
+    list.innerHTML = d.notes.map(n => `
+      <div class="note-item" onclick="showNote('${n.id}')">
+        <div>
+          <div class="note-title">${n.title}</div>
+          <div class="note-excerpt">${n.excerpt}</div>
+          <span class="note-tag">${n.tag}</span>
+        </div>
+        <div class="note-date">${n.date}</div>
+      </div>`).join('');
+  }
+  showPage('list');
+}
+
+function showNote(id) {
+  const all = Object.values(data).flatMap(c => c.notes);
+  const note = all.find(n => n.id === id);
+  const cat = Object.entries(data).find(([, v]) => v.notes.some(n => n.id === id))[0];
+  document.getElementById('back-label').textContent = '返回 ' + cat;
+  document.getElementById('article-content').innerHTML = `
+    <div class="article-tag">${note.tag}</div>
+    <h1>${note.title}</h1>
+    <div class="article-meta">${note.date}</div>
+    <div class="article-body">${note.content}</div>`;
+  showPage('article');
+}
+
+function goBackToList() { showCat(currentCat); }
+</script>
+</body>
+</html>
