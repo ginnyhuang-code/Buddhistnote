@@ -33,8 +33,6 @@
       ".bn-topbar .bn-home{color:#D5C9BA;font-family:'Noto Sans TC',sans-serif;font-size:.95rem;letter-spacing:.08em;margin-left:auto;}" +
       ".bn-topbar a.bn-home:hover{color:#C9A84C;}" +
       ".bn-topbar .bn-here.bn-home{color:#C9A84C;}" +
-      ".bn-sidebar-home{display:block;margin:0 0 1.1rem;color:#8B6914;font-family:'Noto Sans TC',sans-serif;font-size:.9rem;text-decoration:none;}" +
-      ".bn-sidebar-home:hover{color:#C9A84C;text-decoration:underline;}" +
       "@media(max-width:480px){.bn-topbar{padding:0 1.1rem;gap:.6rem;}}";
     var st = document.createElement("style");
     st.id = "bn-topbar-style";
@@ -87,13 +85,4 @@
   }
 
   document.body.insertBefore(nav, document.body.firstChild);
-
-  var sidebar = document.querySelector(".sidebar");
-  if (sidebar && !sidebar.querySelector(".bn-sidebar-home")) {
-    var back = document.createElement("a");
-    back.className = "bn-sidebar-home";
-    back.href = "index.html";
-    back.textContent = "← 回首頁";
-    sidebar.insertBefore(back, sidebar.firstChild);
-  }
 })();
