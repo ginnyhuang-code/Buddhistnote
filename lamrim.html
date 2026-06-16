@@ -3,9 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>《菩提道次第略論》第一堂 — 向佛而行</title>
-<meta name="description" content="《菩提道次第略論》第一堂筆記（115/6/8，遠登格西講授）：道次第傳承、深見與廣行二大車軌、四大科判、阿底峽尊者之殊勝。">
-<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@500;700&family=Noto+Sans+TC:wght@400;500&display=swap" rel="stylesheet">
+<title>《菩提道次第略論》 — 向佛而行</title>
+<meta name="description" content="《菩提道次第略論》（宗喀巴大師著・如性法師譯・遠登格西講授）修學筆記，依四大科判與三士道次第整理。第一堂：傳承與造論者殊勝。">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@300;400;500;700&family=Noto+Sans+TC:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
   :root{
     --parchment:#F7F3EE;
@@ -17,307 +17,335 @@
     --rule:#E2D8C8;
     --sidebar-bg:#EFE7DA;
     --accent-bg:#F2EADB;
+    --active-bg:#E7DBC6;
   }
   *{box-sizing:border-box;margin:0;padding:0;}
   html{scroll-behavior:smooth;}
   body{
     background:var(--parchment);
     color:var(--ink);
-    font-family:'Noto Sans TC','PingFang TC','Microsoft JhengHei',sans-serif;
-    line-height:1.95;
-    font-size:17px;
+    font-family:'Noto Serif TC','Songti TC',serif;
+    min-height:100vh;
   }
   a{color:var(--gold);text-decoration:none;}
   a:hover{text-decoration:underline;}
 
-  /* 版面：左側邊欄 + 右內容 */
-  .wrap{display:flex;min-height:100vh;max-width:1180px;margin:0 auto;}
+  /* 整頁標題列 */
+  .page-header{max-width:1180px;margin:0 auto;padding:3rem 3rem 2rem;border-bottom:1px solid var(--rule);}
+  .page-header .ph-eyebrow{font-family:'Noto Sans TC',sans-serif;color:var(--gold);font-size:.88rem;font-weight:400;letter-spacing:.15em;margin-bottom:.6rem;}
+  .page-header h1{font-weight:700;font-size:2.25rem;color:var(--ink);letter-spacing:.05em;margin-bottom:.5rem;}
+  .page-header .ph-sub{font-family:'Noto Sans TC',sans-serif;color:var(--ink-soft);font-size:.95rem;font-weight:400;}
+
+  /* 側欄＋內容 */
+  .wrap{display:flex;max-width:1180px;margin:0 auto;align-items:flex-start;}
   .sidebar{
-    width:248px;flex-shrink:0;background:var(--sidebar-bg);
+    width:250px;flex-shrink:0;padding:1.8rem 1.1rem;
     border-right:1px solid var(--rule);
-    padding:1.6rem 1.1rem;position:sticky;top:0;align-self:flex-start;
-    height:100vh;overflow-y:auto;
+    position:sticky;top:0;align-self:flex-start;
   }
-  .sidebar .site-title{
-    font-family:'Noto Serif TC',serif;font-weight:700;font-size:1.15rem;
-    color:var(--gold);margin-bottom:.2rem;
+  .toc-label{font-family:'Noto Sans TC',sans-serif;font-size:.82rem;font-weight:400;letter-spacing:.15em;color:var(--ink-soft);margin:.2rem 0 1rem;}
+  .kp-group{font-family:'Noto Sans TC',sans-serif;font-size:.8rem;font-weight:500;letter-spacing:.1em;color:var(--gold);margin:1.2rem 0 .45rem;padding-left:.2rem;}
+  .kp-group:first-of-type{margin-top:.2rem;}
+  .tab{
+    display:block;width:100%;text-align:left;
+    padding:.5rem .8rem;border-radius:8px;cursor:pointer;
+    background:none;border:none;border-left:3px solid transparent;
+    color:var(--ink-soft);font-family:'Noto Serif TC',serif;
+    line-height:1.5;margin-bottom:.2rem;
   }
-  .sidebar .site-sub{font-size:.8rem;color:var(--ink-soft);margin-bottom:1.4rem;}
-  .sidebar a.back{display:inline-block;font-size:.85rem;margin-bottom:1.2rem;color:var(--ink-soft);}
-  .toc-label{font-size:.72rem;letter-spacing:.12em;color:var(--gold-light);margin:.4rem 0 .5rem;font-weight:500;}
-  .toc a{
-    display:block;padding:.42rem .55rem;border-radius:6px;color:var(--ink);
-    font-size:.9rem;line-height:1.5;margin-bottom:.1rem;
-  }
-  .toc a:hover{background:var(--accent-bg);text-decoration:none;color:var(--gold);}
+  .tab .tab-num{display:block;font-size:.95rem;font-weight:400;}
+  .tab .tab-topic{display:block;font-family:'Noto Sans TC',sans-serif;font-size:.8rem;color:var(--ink-soft);margin-top:.12rem;}
+  .tab:hover{background:var(--accent-bg);color:var(--ink);}
+  .tab.active{background:var(--active-bg);border-left-color:var(--gold);}
+  .tab.active .tab-num{color:var(--gold);font-weight:500;}
+  .tab.active .tab-topic{color:var(--gold);}
+  .kp-empty{font-family:'Noto Sans TC',sans-serif;font-size:.8rem;color:var(--ink-soft);opacity:.55;padding:.1rem .8rem .3rem;}
 
-  .content{flex:1;min-width:0;padding:2.6rem 3rem 5rem;}
+  .content{flex:1;min-width:0;padding:1.9rem 3rem 5rem;}
+  .panel{display:none;}
+  .panel.active{display:block;}
+  .panel .eyebrow{font-family:'Noto Sans TC',sans-serif;color:var(--gold);font-size:.84rem;font-weight:400;letter-spacing:.12em;margin-bottom:.4rem;}
+  .panel .title{
+    font-weight:700;font-size:1.55rem;color:var(--ink);letter-spacing:.04em;
+    border-bottom:1px solid var(--rule);padding-bottom:.85rem;margin-bottom:1.8rem;
+  }
+
   @media (max-width:860px){
+    .page-header{padding:2rem 1.3rem 1.4rem;}
+    .page-header h1{font-size:1.9rem;}
     .wrap{flex-direction:column;}
-    .sidebar{width:auto;height:auto;position:static;border-right:none;border-bottom:1px solid var(--rule);}
-    .sidebar{overflow-y:visible;}
-    .content{padding:1.8rem 1.3rem 4rem;}
+    .sidebar{width:auto;position:static;border-right:none;border-bottom:1px solid var(--rule);}
+    .content{padding:1.6rem 1.3rem 4rem;}
   }
 
-  /* 標題與區塊 */
-  .page-head{border-bottom:2px solid var(--gold);padding-bottom:1.2rem;margin-bottom:2rem;}
-  .page-head h1{font-family:'Noto Serif TC',serif;font-weight:700;font-size:1.9rem;color:var(--gold);line-height:1.4;}
-  .page-head .meta{margin-top:.6rem;color:var(--ink-soft);font-size:.95rem;}
-  .page-head .meta span{margin-right:1.2rem;}
-
-  section{margin-bottom:2.6rem;scroll-margin-top:1rem;}
-  section h2{
-    font-family:'Noto Serif TC',serif;font-weight:700;font-size:1.32rem;color:var(--gold);
-    margin-bottom:.9rem;padding-left:.7rem;border-left:5px solid var(--gold);
+  /* 內容區塊 */
+  .block{margin-bottom:2.4rem;}
+  .block h3{
+    font-family:'Noto Serif TC',serif;font-weight:700;font-size:1.18rem;color:var(--gold);
+    letter-spacing:.02em;line-height:1.5;margin:0 0 .9rem;padding-left:.7rem;border-left:4px solid var(--gold);
   }
-  section h3{
-    font-family:'Noto Serif TC',serif;font-weight:500;font-size:1.08rem;color:var(--ink);
-    margin:1.4rem 0 .6rem;
-  }
-  p{margin-bottom:1rem;text-align:justify;}
+  .block h4{font-family:'Noto Sans TC',sans-serif;font-weight:500;font-size:.95rem;color:var(--gold);letter-spacing:.06em;margin:1.4rem 0 .6rem;}
+  .block p{font-size:1.05rem;line-height:2;font-weight:400;color:var(--ink);margin-bottom:1rem;text-align:justify;}
 
   /* 引文（禮讚文、偈頌、論文原文） */
   blockquote{
-    background:var(--accent-bg);border-left:4px solid var(--gold-light);
-    padding:1rem 1.3rem;margin:1.1rem 0;border-radius:0 8px 8px 0;
-    font-family:'Noto Serif TC',serif;color:var(--ink);line-height:2.05;
+    background:var(--accent-bg);border-left:3px solid var(--gold);
+    padding:1rem 1.3rem;margin:1.1rem 0;border-radius:0 4px 4px 0;
+    font-family:'Noto Serif TC',serif;color:var(--ink);line-height:2;font-weight:500;font-size:1.02rem;
   }
-  blockquote.verse{font-size:1.02rem;}
 
   /* 法源傳承鏈 */
-  .lineage{
-    background:var(--paper);border:1px solid var(--rule);border-radius:10px;
-    padding:1.1rem 1.3rem;margin:1.2rem 0;
-  }
+  .lineage{background:var(--paper);border:1px solid var(--rule);border-radius:8px;padding:1.1rem 1.3rem;margin:1.2rem 0;}
   .lineage .step{display:flex;align-items:center;flex-wrap:wrap;gap:.5rem .7rem;font-size:.97rem;}
   .lineage .node{background:var(--accent-bg);border:1px solid var(--rule);border-radius:20px;padding:.3rem .85rem;font-family:'Noto Serif TC',serif;}
   .lineage .arrow{color:var(--gold);font-weight:700;}
 
   /* 科判表 */
-  .kepan{background:var(--paper);border:1px solid var(--rule);border-radius:10px;padding:1.2rem 1.4rem;margin:1.2rem 0;font-family:'Noto Serif TC',serif;}
+  .kepan{background:var(--paper);border:1px solid var(--rule);border-radius:8px;padding:1.2rem 1.4rem;margin:1.2rem 0;font-family:'Noto Serif TC',serif;}
   .kepan .root{font-weight:700;color:var(--gold);margin-bottom:.6rem;}
   .kepan ul{list-style:none;padding-left:1.2rem;border-left:2px solid var(--rule);margin-left:.3rem;}
+  .kepan ul ul{margin-top:.2rem;}
   .kepan li{position:relative;padding:.25rem 0 .25rem .9rem;line-height:1.7;}
   .kepan li::before{content:"";position:absolute;left:-2px;top:1.05em;width:.7rem;height:2px;background:var(--rule);}
   .kepan .lv2{color:var(--ink);font-weight:500;}
   .kepan .lv3{color:var(--ink-soft);font-size:.94rem;}
 
   /* 重點提示卡 */
-  .highlight{
-    background:linear-gradient(180deg,#F4ECDC,#F0E6D2);
-    border:1px solid var(--gold-light);border-radius:12px;
-    padding:1.6rem 1.8rem;margin-top:2rem;
-  }
-  .highlight > h2{border-left:none;padding-left:0;display:flex;align-items:center;gap:.5rem;}
-  .highlight h3{color:var(--gold);font-weight:700;margin:1.2rem 0 .4rem;}
-  .highlight h3:first-of-type{margin-top:.4rem;}
+  .highlight{background:var(--accent-bg);border:1px solid var(--gold-light);border-radius:10px;padding:1.6rem 1.8rem;margin-top:2.6rem;}
+  .highlight > h3{border-left:none;padding-left:0;font-size:1.3rem;margin-bottom:.4rem;}
+  .highlight h4{margin-top:1.4rem;}
+  .highlight h4:first-of-type{margin-top:.6rem;}
 
-  .num{
-    display:inline-flex;align-items:center;justify-content:center;
-    width:1.6rem;height:1.6rem;border-radius:50%;background:var(--gold);color:#fff;
-    font-size:.85rem;margin-right:.5rem;flex-shrink:0;font-family:'Noto Sans TC',sans-serif;
-  }
-
-  footer{margin-top:3rem;padding-top:1.4rem;border-top:1px solid var(--rule);color:var(--ink-soft);font-size:.85rem;text-align:center;}
+  footer{max-width:1180px;margin:0 auto;padding:1.6rem 3rem 2.5rem;border-top:1px solid var(--rule);color:var(--ink-soft);font-family:'Noto Sans TC',sans-serif;font-size:.85rem;text-align:center;}
 </style>
   <script>window.SITE_NAV = { crumbs: [{ label: "《菩提道次第略論》" }] };</script>
   <script src="nav.js" defer></script>
 </head>
 <body>
+
+<header class="page-header">
+  <div class="ph-eyebrow">宗喀巴大師 造・如性法師 譯・遠登格西 講授</div>
+  <h1>《菩提道次第略論》</h1>
+  <div class="ph-sub">依四大科判與三士道次第整理的修學筆記</div>
+</header>
+
 <div class="wrap">
 
-  <!-- 側邊欄 -->
+  <!-- 側欄：依科判分組 -->
   <aside class="sidebar">
-    <div class="toc-label">本堂目錄</div>
-    <nav class="toc">
-      <a href="#intro">一、建立與傳承</a>
-      <a href="#lizan">二、禮讚文</a>
-      <a href="#che">三、深見與廣行二大車軌</a>
-      <a href="#lishi">四、立誓造論</a>
-      <a href="#lunming">五、結合論名</a>
-      <a href="#kepan">六、四大科判（表一）</a>
-      <a href="#jia1">七、甲一・造論者之殊勝</a>
-      <a href="#fayuan">八、道次第法源</a>
-      <a href="#yi1">九、乙一・圓滿種姓之理</a>
-      <a href="#yi2">十、乙二丙一・知見廣博</a>
-      <a href="#chujia">十一、出家與戒學成就</a>
-      <a href="#summary">★ 重點提示</a>
+    <div class="toc-label">目錄</div>
+    <nav>
+      <div class="kp-group">道前基礎</div>
+      <button class="tab active" data-target="panel-l1">
+        <span class="tab-num">第一堂</span>
+        <span class="tab-topic">傳承與造論者殊勝</span>
+      </button>
+
+      <div class="kp-group">下士道</div>
+      <div class="kp-empty">（陸續新增）</div>
+
+      <div class="kp-group">中士道</div>
+      <div class="kp-empty">（陸續新增）</div>
+
+      <div class="kp-group">上士道</div>
+      <div class="kp-empty">（陸續新增）</div>
     </nav>
   </aside>
 
   <!-- 內容 -->
   <main class="content">
 
-    <div class="page-head">
-      <h1>《菩提道次第略論》第一堂</h1>
-      <div class="meta">
-        <span>115/6/8</span>
-        <span>宗喀巴大師著・如性法師譯</span>
-        <span>遠登格西講授</span>
+    <!-- ========== 第一堂　傳承與造論者殊勝 ========== -->
+    <section class="panel active" id="panel-l1">
+      <div class="eyebrow">115/6/8・遠登格西 講授</div>
+      <h2 class="title">第一堂　傳承與造論者殊勝</h2>
+
+      <div class="block">
+        <h3>一、《菩提道次第略論》的建立與傳承</h3>
+        <p>宗喀巴大師於 1402 年（46 歲）造《菩提道次第廣論》，於 1415 年（59 歲）造《菩提道次第略論》。菩提道次第有廣、中、略三種論典：廣為《廣論》，中為《略論》，最略為《三主要道》。雖然《略論》文字較《廣論》精簡許多，但所詮內容與修學次第完全一致，皆是依佛陀教法，從凡夫地循序引導至成佛果位的完整修行道路，是極為珍貴的修心教法。</p>
+        <p>《菩提道次第略論》有法尊法師及如性法師等不同譯本。本次課程採用如性法師翻譯版本，並加入科判架構。這些科判是依據遮將仁波切的筆記整理歸納而成，結合許多修學要點，有助於掌握全論脈絡。遠登格西曾於尊者座下獲得十八種道次第教授的完整傳承，《菩提道次第略論》即為其中之一。尊者的傳承源自林仁波切，林仁波切為第十三世達賴喇嘛的親教師之一，傳承極為清淨殊勝。</p>
+        <p>在三大寺院需廣泛學習五部大論，內容博大精深，若缺乏次第引導，往往不易自行整理修學架構。尤其在家居士不像出家眾擁有充裕時間深入研學佛法，因此若希望尋找一條能夠脫離輪迴、趣向成佛的完整修心道路，《菩提道次第廣論》、《菩提道次第略論》以及《三主要道》便是最可靠的依據。依循此一傳承與次第修學，決定不會錯誤。因此，弟子對於所學法義應生起恭敬心，了解自己所學的傳承來源、作者為誰，以及論典所闡述的主要內容。對傳承具足信心，才能使聞思修獲得真實利益。</p>
+        <p>本次課程將以消文方式進行。對於較易理解的部分，將順文閱讀；遇到重要或較深奧之處，再加以詳細解釋。由於《菩提道次第略論》內容十分豐富，預計至少需要二至三年的時間，方能較完整地學習完畢。</p>
+        <p>藏傳佛教論師所造的論典，多依一定體例而作。首先禮讚諸佛菩薩及傳承上師，稱為「禮讚文」；其次說明造論目的，稱為「立誓造論」；最後結合論名，介紹本論所要闡述的法義內容。論典開端大多依此方式展開。</p>
       </div>
-    </div>
 
-    <section id="intro">
-      <h2>一、《菩提道次第略論》的建立與傳承</h2>
-      <p>宗喀巴大師於 1402 年（46 歲）造《菩提道次第廣論》，於 1415 年（59 歲）造《菩提道次第略論》。菩提道次第有廣、中、略三種論典：廣為《廣論》，中為《略論》，最略為《三主要道》。雖然《略論》文字較《廣論》精簡許多，但所詮內容與修學次第完全一致，皆是依佛陀教法，從凡夫地循序引導至成佛果位的完整修行道路，是極為珍貴的修心教法。</p>
-      <p>《菩提道次第略論》有法尊法師及如性法師等不同譯本。本次課程採用如性法師翻譯版本，並加入科判架構。這些科判是依據遮將仁波切的筆記整理歸納而成，結合許多修學要點，有助於掌握全論脈絡。遠登格西曾於尊者座下獲得十八種道次第教授的完整傳承，《菩提道次第略論》即為其中之一。尊者的傳承源自林仁波切，林仁波切為第十三世達賴喇嘛的親教師之一，傳承極為清淨殊勝。</p>
-      <p>在三大寺院需廣泛學習五部大論，內容博大精深，若缺乏次第引導，往往不易自行整理修學架構。尤其在家居士不像出家眾擁有充裕時間深入研學佛法，因此若希望尋找一條能夠脫離輪迴、趣向成佛的完整修心道路，《菩提道次第廣論》、《菩提道次第略論》以及《三主要道》便是最可靠的依據。依循此一傳承與次第修學，決定不會錯誤。因此，弟子對於所學法義應生起恭敬心，了解自己所學的傳承來源、作者為誰，以及論典所闡述的主要內容。對傳承具足信心，才能使聞思修獲得真實利益。</p>
-      <p>本次課程將以消文方式進行。對於較易理解的部分，將順文閱讀；遇到重要或較深奧之處，再加以詳細解釋。由於《菩提道次第略論》內容十分豐富，預計至少需要二至三年的時間，方能較完整地學習完畢。</p>
-      <p>藏傳佛教論師所造的論典，多依一定體例而作。首先禮讚諸佛菩薩及傳承上師，稱為「禮讚文」；其次說明造論目的，稱為「立誓造論」；最後結合論名，介紹本論所要闡述的法義內容。論典開端大多依此方式展開。</p>
-    </section>
+      <div class="block">
+        <h3>二、禮讚文</h3>
+        <p>首先，宗喀巴大師先寫禮讚：</p>
+        <blockquote>娑婆剎土自在薄伽梵，勝者補處彌勒法王尊；<br>一切善逝嚴父妙音尊，勝者授記龍樹及無著。</blockquote>
+        <p>首先禮讚的是薄伽梵，即釋迦牟尼佛。佛陀於大藏經中宣說八萬四千法門，總攝而言可歸納為「深見」與「廣行」兩大傳承。由於凡夫難以直接領悟佛陀教法，因此需要依靠諸大菩薩的闡釋與引導。</p>
+      </div>
 
-    <section id="lizan">
-      <h2>二、禮讚文</h2>
-      <p>首先，宗喀巴大師先寫禮讚：</p>
-      <blockquote class="verse">娑婆剎土自在薄伽梵，勝者補處彌勒法王尊；<br>一切善逝嚴父妙音尊，勝者授記龍樹及無著。</blockquote>
-      <p>首先禮讚的是薄伽梵，即釋迦牟尼佛。佛陀於大藏經中宣說八萬四千法門，總攝而言可歸納為「深見」與「廣行」兩大傳承。由於凡夫難以直接領悟佛陀教法，因此需要依靠諸大菩薩的闡釋與引導。</p>
-    </section>
-
-    <section id="che">
-      <h2>二、深見與廣行二大車軌</h2>
-      <p>廣行方面，由彌勒菩薩透過《慈氏五論》開顯佛陀廣大菩薩行的內涵，因此論中其次禮讚彌勒菩薩。深見方面，則由文殊菩薩傳承空性正見，後傳龍樹菩薩，建立聖觀派傳承；彌勒菩薩則將《慈氏五論》傳予無著菩薩，建立廣行派傳承。</p>
-      <div class="lineage">
-        <div class="step"><span class="node">釋迦牟尼佛</span></div>
-        <div class="step" style="margin-top:.6rem;">
-          <span class="node">聖觀派（見解）</span><span class="arrow">→</span>
-          <span class="node">文殊菩薩</span><span class="arrow">→</span>
-          <span class="node">龍樹菩薩</span>
+      <div class="block">
+        <h3>三、深見與廣行二大車軌</h3>
+        <p>廣行方面，由彌勒菩薩透過《慈氏五論》開顯佛陀廣大菩薩行的內涵，因此論中其次禮讚彌勒菩薩。深見方面，則由文殊菩薩傳承空性正見，後傳龍樹菩薩，建立聖觀派傳承；彌勒菩薩則將《慈氏五論》傳予無著菩薩，建立廣行派傳承。</p>
+        <div class="lineage">
+          <div class="step"><span class="node">釋迦牟尼佛</span></div>
+          <div class="step" style="margin-top:.6rem;">
+            <span class="node">聖觀派（見解）</span><span class="arrow">→</span>
+            <span class="node">文殊菩薩</span><span class="arrow">→</span>
+            <span class="node">龍樹菩薩</span>
+          </div>
+          <div class="step" style="margin-top:.5rem;">
+            <span class="node">廣行派（行為）</span><span class="arrow">→</span>
+            <span class="node">彌勒菩薩《慈氏五論》</span><span class="arrow">→</span>
+            <span class="node">無著菩薩</span>
+          </div>
         </div>
-        <div class="step" style="margin-top:.5rem;">
-          <span class="node">廣行派（行為）</span><span class="arrow">→</span>
-          <span class="node">彌勒菩薩《慈氏五論》</span><span class="arrow">→</span>
-          <span class="node">無著菩薩</span>
+        <p>佛陀（約公元前 400 年）於入涅槃前曾授記，未來將有龍樹菩薩與無著菩薩出世弘揚正法。龍樹菩薩（約西元 2 世紀）繼承深見傳承，闡揚甚深空性見；無著菩薩（約西元 4 世紀）繼承廣行傳承，弘揚廣大菩薩行。自此，深見與廣行兩大車軌在人間廣為流傳，成為後世修學大乘佛法的重要依據。</p>
+      </div>
+
+      <div class="block">
+        <h3>四、立誓造論</h3>
+        <blockquote>於彼諸尊恭敬頂禮已，為易趣入深見及廣行；<br>二種道次是故於此處，復以簡略之理而宣說。</blockquote>
+        <p>宗喀巴大師首先虔誠頂禮深見與廣行兩大傳承的上師，並發願以簡明扼要的方式宣說道次第的修心教授，利益有志修學佛法的弟子。其造論目的在於利樂眾生，並將聖觀派與廣行派兩大傳承的精要完整開示出來。</p>
+      </div>
+
+      <div class="block">
+        <h3>五、結合論名</h3>
+        <p>第三是結合論名，介紹本論所宣說的法義。</p>
+        <blockquote>此中總攝一切佛經要義，是龍樹及無著二大車之道軌，乃勝士夫趣向一切種智地之法範，無缺遍攝三種士夫一切修持次第。由菩提道次第引導具善緣者趣入佛地之理，即所說法。</blockquote>
+        <p>《菩提道次第略論》中的「菩提」意指佛果，「道」是趣向佛果的修行方法，「次第」則表示修行必須循序漸進、依次而修。因此，本論即是開示成佛之道的修行次第。</p>
+        <p>佛陀入涅槃後數百年間，大乘佛法在世間漸趨隱沒。龍樹菩薩與無著菩薩承接世尊教法，再度弘揚於人間，因此被尊稱為「二大車軌」。所謂二大車軌是指能夠承續佛陀的教法，並將其廣弘於世的傳承祖師，指的就是龍樹菩薩與無著菩薩。</p>
+        <p>「一切種智」是指佛陀成佛時所證得的智慧，是成佛後內心的名相，能夠如實了知一切法。「無缺」是指不會有任何錯誤。宗喀巴大師希望透過《菩提道次第》的教授，引導有緣的佛弟子依循正確的修學次第，最終趣入佛地，因此撰寫了這部論典。</p>
+      </div>
+
+      <div class="block">
+        <h3>六、《略論》的四大科判</h3>
+        <p>接著進入正式講解。科判第一是「依照智者們的主張」，宗喀巴大師所說法義皆有經論依據，並依循歷代智者的教授，引導眾生趣向佛地。</p>
+        <blockquote>此中，如同吉祥比噶瑪拉希拉寺之智者承許：『造法者之殊勝』、『法之殊勝』、『如何聞、說彼法之理』三者於初為要。</blockquote>
+        <p>《菩提道次第略論》所依據的傳承，來自印度大修行者阿底峽尊者。阿底峽尊者主要駐錫於比噶瑪拉希拉寺，並非出自那爛陀寺系統。關於印度佛教史，藏、漢傳承對部分歷史細節有不同記載，例如龍樹菩薩是否曾於那爛陀寺弘法，便有不同說法。比噶瑪拉希拉寺是印度後期極為重要的佛教學修中心，阿底峽尊者即出自此一清淨傳承。因此，《菩提道次第略論》的法源清淨無誤，傳承與造論者皆極為殊勝。其所宣說的法義，能引導修行者循序漸進地遠離三惡趣、解脫輪迴，乃至成就佛果。</p>
+        <p>如同《菩提道次第廣論》，《略論》的內容大綱也可分成四個：</p>
+        <div class="kepan">
+          <div class="root">如是菩提道次第之引導分四</div>
+          <ul>
+            <li class="lv2">甲一、為顯其法源清淨故，開示造論者之殊勝。</li>
+            <li class="lv2">甲二、為令他於教授起恭敬故，開示法之殊勝。</li>
+            <li class="lv2">甲三、如何聞、說具有二種殊勝之法。</li>
+            <li class="lv2">甲四、如何以正教授引導弟子之次第。</li>
+          </ul>
         </div>
-      </div>
-      <p>佛陀（約公元前 400 年）於入涅槃前曾授記，未來將有龍樹菩薩與無著菩薩出世弘揚正法。龍樹菩薩（約西元 2 世紀）繼承深見傳承，闡揚甚深空性見；無著菩薩（約西元 4 世紀）繼承廣行傳承，弘揚廣大菩薩行。自此，深見與廣行兩大車軌在人間廣為流傳，成為後世修學大乘佛法的重要依據。</p>
-    </section>
-
-    <section id="lishi">
-      <h2>四、立誓造論</h2>
-      <blockquote class="verse">於彼諸尊恭敬頂禮已，為易趣入深見及廣行；<br>二種道次是故於此處，復以簡略之理而宣說。</blockquote>
-      <p>宗喀巴大師首先虔誠頂禮深見與廣行兩大傳承的上師，並發願以簡明扼要的方式宣說道次第的修心教授，利益有志修學佛法的弟子。其造論目的在於利樂眾生，並將聖觀派與廣行派兩大傳承的精要完整開示出來。</p>
-    </section>
-
-    <section id="lunming">
-      <h2>五、結合論名</h2>
-      <p>第三是結合論名，介紹本論所宣說的法義。</p>
-      <blockquote>此中總攝一切佛經要義，是龍樹及無著二大車之道軌，乃勝士夫趣向一切種智地之法範，無缺遍攝三種士夫一切修持次第。由菩提道次第引導具善緣者趣入佛地之理，即所說法。</blockquote>
-      <p>《菩提道次第略論》中的「菩提」意指佛果，「道」是趣向佛果的修行方法，「次第」則表示修行必須循序漸進、依次而修。因此，本論即是開示成佛之道的修行次第。</p>
-      <p>佛陀入涅槃後數百年間，大乘佛法在世間漸趨隱沒。龍樹菩薩與無著菩薩承接世尊教法，再度弘揚於人間，因此被尊稱為「二大車軌」。所謂二大車軌是指能夠承續佛陀的教法，並將其廣弘於世的傳承祖師，指的就是龍樹菩薩與無著菩薩。</p>
-      <p>「一切種智」是指佛陀成佛時所證得的智慧，是成佛後內心的名相，能夠如實了知一切法。「無缺」是指不會有任何錯誤。宗喀巴大師希望透過《菩提道次第》的教授，引導有緣的佛弟子依循正確的修學次第，最終趣入佛地，因此撰寫了這部論典。</p>
-    </section>
-
-    <section id="kepan">
-      <h2>六、《略論》的四大科判</h2>
-      <p>接著進入正式講解。科判第一是「依照智者們的主張」，宗喀巴大師所說法義皆有經論依據，並依循歷代智者的教授，引導眾生趣向佛地。</p>
-      <blockquote>此中，如同吉祥比噶瑪拉希拉寺之智者承許：『造法者之殊勝』、『法之殊勝』、『如何聞、說彼法之理』三者於初為要。</blockquote>
-      <p>《菩提道次第略論》所依據的傳承，來自印度大修行者阿底峽尊者。阿底峽尊者主要駐錫於比噶瑪拉希拉寺，並非出自那爛陀寺系統。關於印度佛教史，藏、漢傳承對部分歷史細節有不同記載，例如龍樹菩薩是否曾於那爛陀寺弘法，便有不同說法。比噶瑪拉希拉寺是印度後期極為重要的佛教學修中心，阿底峽尊者即出自此一清淨傳承。因此，《菩提道次第略論》的法源清淨無誤，傳承與造論者皆極為殊勝。其所宣說的法義，能引導修行者循序漸進地遠離三惡趣、解脫輪迴，乃至成就佛果。</p>
-      <p>如同《菩提道次第廣論》，《略論》的內容大綱也可分成四個：</p>
-      <div class="kepan">
-        <div class="root">如是菩提道次第之引導分四</div>
-        <ul>
-          <li class="lv2">甲一、為顯其法源清淨故，開示造論者之殊勝。</li>
-          <li class="lv2">甲二、為令他於教授起恭敬故，開示法之殊勝。</li>
-          <li class="lv2">甲三、如何聞、說具有二種殊勝之法。</li>
-          <li class="lv2">甲四、如何以正教授引導弟子之次第。</li>
-        </ul>
-      </div>
-      <p>「二種殊勝之法」是指廣行與聖觀兩大傳承。上師需依弟子的根器與能力，以善巧方便的方式，引導其循序漸進地趣入殊勝教法的修學次第。以上四個科判也是《菩提道次第廣論》中極為重要的綱要架構，若能熟記並理解其內容，對學習道次第將有很大的幫助。</p>
-      <p>接下來開始講解這四個重要科判的內容。今天課程會上「甲一、為顯其法源清淨故，開示造論者之殊勝」。底下分乙一、乙二、乙三，今天會上到乙二中的「丙一、知見廣博獲教功德之理」結束。</p>
-      <div class="kepan">
-        <div class="root">【表一】甲一・為顯其法源清淨故，開示造論者之殊勝</div>
-        <ul>
-          <li class="lv2">乙一、生於圓滿種姓之理</li>
-          <li class="lv2">乙二、其身獲得功德之理
-            <ul>
-              <li class="lv3">丙一、知見廣博獲教功德之理</li>
-              <li class="lv3">丙二、如理修行獲證功德之理</li>
-            </ul>
-          </li>
-          <li class="lv2">乙三、得已於教所作事業之理
-            <ul>
-              <li class="lv3">丙一、於印度所作事業</li>
-              <li class="lv3">丙二、於西藏所作事業</li>
-            </ul>
-          </li>
-        </ul>
-      </div>
-    </section>
-
-    <section id="jia1">
-      <h2>七、甲一・為顯其法源清淨故，開示造論者之殊勝</h2>
-      <blockquote>總此教授，即是至尊彌勒所造《現觀莊嚴論》之教授；特其基論乃《菩提道炬論》。是故《道炬論》之造者，亦即此教授之造者；又此即是大阿闍黎吉祥燃燈智，別諱共稱具德阿底峽。</blockquote>
-      <p>藏傳佛教認為有「至尊彌勒」和「彌勒佛」兩種層次。為什麼說至尊彌勒而不說彌勒佛？因為現在彌勒佛尚未在人間顯現，在像釋迦牟尼佛一樣弘揚十二大弘誓之前，現於兜率天稱為至尊彌勒；當至人間弘法時才稱為彌勒佛。至尊彌勒是天相，彌勒佛則於人間度眾生，以比丘相示現度眾。漢傳佛教沒有這樣的區分。至尊彌勒所造的《現觀莊嚴論》，是佛陀於二轉法輪時直接講述廣行派行為上的內容（如菩薩十地），也間接講述空性的法門。</p>
-    </section>
-
-    <section id="fayuan">
-      <h2>八、道次第的法源傳承</h2>
-      <p>傳承當中，阿底峽尊者所造的《菩提道炬論》具有極其重要的地位。「阿闍黎」是對具足教授資格之上師的尊稱，「吉祥燃燈智」是阿底峽的法名。《菩提道次第廣論》和《菩提道次第略論》皆是依據阿底峽尊者的《菩提道炬論》；《菩提道炬論》則依據至尊彌勒所作的《現觀莊嚴論》；《現觀莊嚴論》依據佛陀宣說的《般若波羅蜜多經》；《般若波羅蜜多經》主要依據《二萬頌般若波羅蜜多經》。由此可見，道次第的法源上溯至尊彌勒，乃至佛陀親說經典，傳承清淨且有完整的教證依據。</p>
-      <div class="lineage">
-        <div class="step">
-          <span class="node">佛陀《般若波羅蜜多經》</span><span class="arrow">→</span>
-          <span class="node">至尊彌勒《現觀莊嚴論》</span><span class="arrow">→</span>
-          <span class="node">阿底峽《菩提道炬論》</span><span class="arrow">→</span>
-          <span class="node">宗喀巴《菩提道次第》</span>
+        <p>「二種殊勝之法」是指廣行與聖觀兩大傳承。上師需依弟子的根器與能力，以善巧方便的方式，引導其循序漸進地趣入殊勝教法的修學次第。以上四個科判也是《菩提道次第廣論》中極為重要的綱要架構，若能熟記並理解其內容，對學習道次第將有很大的幫助。</p>
+        <p>接下來開始講解這四個重要科判的內容。今天課程會上「甲一、為顯其法源清淨故，開示造論者之殊勝」。底下分乙一、乙二、乙三，今天會上到乙二中的「丙一、知見廣博獲教功德之理」結束。</p>
+        <div class="kepan">
+          <div class="root">【表一】甲一・為顯其法源清淨故，開示造論者之殊勝</div>
+          <ul>
+            <li class="lv2">乙一、生於圓滿種姓之理</li>
+            <li class="lv2">乙二、其身獲得功德之理
+              <ul>
+                <li class="lv3">丙一、知見廣博獲教功德之理</li>
+                <li class="lv3">丙二、如理修行獲證功德之理</li>
+              </ul>
+            </li>
+            <li class="lv2">乙三、得已於教所作事業之理
+              <ul>
+                <li class="lv3">丙一、於印度所作事業</li>
+                <li class="lv3">丙二、於西藏所作事業</li>
+              </ul>
+            </li>
+          </ul>
         </div>
       </div>
-      <blockquote>彼之殊勝分三：<br>乙一、生於圓滿種姓之理。<br>乙二、其身獲得功德之理。<br>乙三、得已於教所作事業之理。</blockquote>
+
+      <div class="block">
+        <h3>七、甲一・為顯其法源清淨故，開示造論者之殊勝</h3>
+        <blockquote>總此教授，即是至尊彌勒所造《現觀莊嚴論》之教授；特其基論乃《菩提道炬論》。是故《道炬論》之造者，亦即此教授之造者；又此即是大阿闍黎吉祥燃燈智，別諱共稱具德阿底峽。</blockquote>
+        <p>藏傳佛教認為有「至尊彌勒」和「彌勒佛」兩種層次。為什麼說至尊彌勒而不說彌勒佛？因為現在彌勒佛尚未在人間顯現，在像釋迦牟尼佛一樣弘揚十二大弘誓之前，現於兜率天稱為至尊彌勒；當至人間弘法時才稱為彌勒佛。至尊彌勒是天相，彌勒佛則於人間度眾生，以比丘相示現度眾。漢傳佛教沒有這樣的區分。至尊彌勒所造的《現觀莊嚴論》，是佛陀於二轉法輪時直接講述廣行派行為上的內容（如菩薩十地），也間接講述空性的法門。</p>
+      </div>
+
+      <div class="block">
+        <h3>八、道次第的法源傳承</h3>
+        <p>傳承當中，阿底峽尊者所造的《菩提道炬論》具有極其重要的地位。「阿闍黎」是對具足教授資格之上師的尊稱，「吉祥燃燈智」是阿底峽的法名。《菩提道次第廣論》和《菩提道次第略論》皆是依據阿底峽尊者的《菩提道炬論》；《菩提道炬論》則依據至尊彌勒所作的《現觀莊嚴論》；《現觀莊嚴論》依據佛陀宣說的《般若波羅蜜多經》；《般若波羅蜜多經》主要依據《二萬頌般若波羅蜜多經》。由此可見，道次第的法源上溯至尊彌勒，乃至佛陀親說經典，傳承清淨且有完整的教證依據。</p>
+        <div class="lineage">
+          <div class="step">
+            <span class="node">佛陀《般若波羅蜜多經》</span><span class="arrow">→</span>
+            <span class="node">至尊彌勒《現觀莊嚴論》</span><span class="arrow">→</span>
+            <span class="node">阿底峽《菩提道炬論》</span><span class="arrow">→</span>
+            <span class="node">宗喀巴《菩提道次第》</span>
+          </div>
+        </div>
+        <blockquote>彼之殊勝分三：<br>乙一、生於圓滿種姓之理。<br>乙二、其身獲得功德之理。<br>乙三、得已於教所作事業之理。</blockquote>
+      </div>
+
+      <div class="block">
+        <h3>九、乙一・生於圓滿種姓之理</h3>
+        <p>首先，講《菩提道炬論》作者阿底峽尊者的殊勝。如納措譯師之《八十讚》云：</p>
+        <blockquote>東薩霍勝境，其中有大城，謂次第聚落。此中有王宮，宮殿極廣闊，名為有金幢，資財權勢盛，等東國漢君。其王善吉祥，後名吉祥光。父母有三子，名曰蓮華藏、月藏、吉祥藏。太子蓮華藏，有五妃九子，長子福吉祥，今為大智者，共稱達那喜；幼子吉祥藏，比丘精進月；次子為月藏，即今至尊師。</blockquote>
+        <p>納措譯師是藏傳的大譯師，將許多經論翻譯成藏文。此偈頌主要介紹阿底峽尊者的身世。印度古代十分重視種姓制度，阿底峽尊者出身於印度王族，因此屬於地位崇高的王族階層。</p>
+      </div>
+
+      <div class="block">
+        <h3>十、乙二丙一・知見廣博獲教功德之理</h3>
+        <blockquote>乙二、其身獲得功德之理分二：丙一、知見廣博獲教功德之理。<br>於二十一歲前，學習內、外四共明處――聲明、因明、工巧明及醫方明，極盡善巧；特於十五歲時，聽聞一遍《正理滴論》，後與一位以擅推理而聞名之外道論辯，令彼折伏，美譽遍揚，此為大卓龍巴所說。</blockquote>
+        <p>此段說明阿底峽尊者年少時學習佛法的情況。尊者不僅精通佛法，也廣泛學習外道典籍。由於智慧卓越，十五歲時僅聽聞一遍法稱論師所造的《正理滴論》，便能善巧運用正理與外道辯論，使對方折服。</p>
+
+        <h4>學習密法的情形</h4>
+        <blockquote>後於黑山道場，依止瑜伽自在羅喉羅古達上師，此師能親見吉祥喜金剛，並得金剛空行母授記；尊者於其座前接受一切灌頂，獲密諱為智密金剛。至二十九歲前，於諸獲得成就上師座前學金剛乘，精通一切教典、教授；一日心生：「密法唯我善巧。」生此念已，諸空行母於其夢中陳示眾多昔所未見密乘經函，摧其慢心。</blockquote>
+        <p>此段說明阿底峽尊者智慧很高，宿世善根深厚，對佛法具有極佳的習氣與領悟力。尊者於二十九歲前即開始學習金剛乘密法並接受灌頂，由於學習迅速，曾生起些許傲慢心。後來諸本尊及成就者於夢中示現更深廣的密法教授，使尊者體悟自身所學仍有限，進而降伏傲慢，增長謙卑與求法之心。</p>
+      </div>
+
+      <div class="block">
+        <h3>十一、出家與戒學成就</h3>
+        <blockquote>其後諸多上師、本尊於其面前或於夢中勸云：「若能出家，便能廣利聖教及諸眾生。」依此因緣，請大眾部持律上座，得加行道趣入實性一分三摩地者――名曰戒鎧為親教師而正出家，其諱名為吉祥燃燈智。此後至三十一歲前，學習相乘內明上下諸藏；特於能飛聚落法鎧上師座前，十二年中聽聞《大毘婆沙論》。精通根本四部之教典故，縱於各部中受食等微細取捨，亦無雜亂而遍了知。</blockquote>
+        <p>諸多上師與本尊勸請阿底峽尊者出家，以廣利聖教與眾生。出家後至三十一歲前廣學顯教經論，其中「上下諸藏」，上指量學七論，下指對法七論。尤其於法鎧上師座前，歷經十二年學習小乘重要論典《大毘婆沙論》，對經論與戒律皆有深厚造詣。</p>
+        <p>「精通根本四部之教典故」，尊者雖已通達顯教與密教，仍進一步深入學習戒律與三藏教典。由於精通各部派的戒律內容，因此對於受食等細微戒條的開遮持犯皆能清楚分辨。這也顯示阿底峽尊者極為重視戒體，並強調一切佛法若能建立在清淨戒行的實修基礎上，功德將更為殊勝。</p>
+      </div>
+
+      <!-- 重點提示 -->
+      <div class="block highlight">
+        <h3>★ 重點提示</h3>
+
+        <h4>一、《菩提道次第略論》的建立與傳承</h4>
+        <p>宗喀巴大師於 1402 年造《廣論》，1415 年造《略論》。《廣論》、《略論》與《三主要道》同屬道次第教授，內容皆依佛陀教法，引導修行者由凡夫地循序趣向佛果。本次課程採用如性法師譯本，遠登格西承接完整道次第傳承，法脈清淨殊勝。</p>
+
+        <h4>二、深見與廣行二大車軌</h4>
+        <p>佛陀所說八萬四千法門，總攝為深見與廣行兩大傳承。深見方面由文殊菩薩傳予龍樹菩薩，弘揚空性正見；廣行方面由彌勒菩薩透過《慈氏五論》傳予無著菩薩，弘揚廣大菩薩行。龍樹與無著承接佛陀大乘教法，特別是大乘教法在世間中提倡與興盛的主要因素，因此被尊稱為授記二大車軌。</p>
+
+        <h4>三、《菩提道次第》的內容與法源</h4>
+        <p>宗喀巴大師為令學人易於趣入深見與廣行二種道次第，而造《菩提道次第略論》。「菩提」指佛果，「道」指成佛的方法，「次第」指循序漸進的修學歷程。本論總攝一切佛經要義，完整涵攝三種士夫的修學次第，透過這論來實修從一個凡夫初學佛法開始至成佛的次第皆能指引你的修行道路的好導向。</p>
+        <p>法源依次為：<br>佛陀以廣行法脈來論傳承如《般若波羅蜜多經》 → 至尊彌勒《現觀莊嚴論》 為主→ 無著、世親、安慧、金州大師、傳阿底峽。以深觀法脈來論佛陀傳於文殊菩薩-龍樹、聖天、佛護、月稱等傳⋯阿底峽尊者，尊者以廣行與深見傳承融合造《菩提道炬論》 傳於藏地→ 宗喀巴《菩提道次第》</p>
+
+        <h4>四、《略論》的四大綱要</h4>
+        <p>《略論》依智者傳統建立四大科判：</p>
+        <p>1. 開示造論者之殊勝<br>2. 開示法之殊勝<br>3. 如何聞說殊勝之法<br>4. 如何以正教授引導弟子之次第</p>
+        <p>本堂課主要進入第一科判，說明阿底峽尊者的殊勝功德。</p>
+
+        <h4>五、阿底峽尊者殊勝出身與廣學成就</h4>
+        <p>阿底峽尊者出身印度王族，二十一歲前即精通聲明、因明、工巧明與醫方明。十五歲時僅聽聞一遍《正理滴論》，便能折服外道。其後廣學顯密教法，接受金剛乘灌頂，獲密號「智密金剛」。曾因自認精通密法而生慢心，後經空行母示現未見過的密乘經函而降伏慢心。</p>
+
+        <h4>六、阿底峽尊者出家與戒學成就</h4>
+        <p>阿底峽尊者在諸上師與本尊勸請下出家，以戒鎧長老為親教師，法名吉祥燃燈智。出家後廣學上下諸藏，尤其於法鎧上師座前十二年間聽聞《大毘婆沙論》。尊者精通根本四部教典，對各部派戒律及微細取捨皆能清楚分辨，於顯教、密教與戒律三方面皆具深厚成就。</p>
+      </div>
     </section>
 
-    <section id="yi1">
-      <h2>九、乙一・生於圓滿種姓之理</h2>
-      <p>首先，講《菩提道炬論》作者阿底峽尊者的殊勝。如納措譯師之《八十讚》云：</p>
-      <blockquote class="verse">東薩霍勝境，其中有大城，謂次第聚落。此中有王宮，宮殿極廣闊，名為有金幢，資財權勢盛，等東國漢君。其王善吉祥，後名吉祥光。父母有三子，名曰蓮華藏、月藏、吉祥藏。太子蓮華藏，有五妃九子，長子福吉祥，今為大智者，共稱達那喜；幼子吉祥藏，比丘精進月；次子為月藏，即今至尊師。</blockquote>
-      <p>納措譯師是藏傳的大譯師，將許多經論翻譯成藏文。此偈頌主要介紹阿底峽尊者的身世。印度古代十分重視種姓制度，阿底峽尊者出身於印度王族，因此屬於地位崇高的王族階層。</p>
+    <!-- ========== 新增堂次範本（複製整段、改 id 與內容，並在側欄對應科判下加一個 tab） ==========
+    <section class="panel" id="panel-l2">
+      <div class="eyebrow">115/X/X・遠登格西 講授</div>
+      <h2 class="title">第二堂　主題</h2>
+      <div class="block">
+        <h3>一、段落標題</h3>
+        <p>內容……</p>
+      </div>
     </section>
-
-    <section id="yi2">
-      <h2>十、乙二丙一・知見廣博獲教功德之理</h2>
-      <blockquote>乙二、其身獲得功德之理分二：丙一、知見廣博獲教功德之理。<br>於二十一歲前，學習內、外四共明處――聲明、因明、工巧明及醫方明，極盡善巧；特於十五歲時，聽聞一遍《正理滴論》，後與一位以擅推理而聞名之外道論辯，令彼折伏，美譽遍揚，此為大卓龍巴所說。</blockquote>
-      <p>此段說明阿底峽尊者年少時學習佛法的情況。尊者不僅精通佛法，也廣泛學習外道典籍。由於智慧卓越，十五歲時僅聽聞一遍法稱論師所造的《正理滴論》，便能善巧運用正理與外道辯論，使對方折服。</p>
-
-      <h3>學習密法的情形</h3>
-      <blockquote>後於黑山道場，依止瑜伽自在羅喉羅古達上師，此師能親見吉祥喜金剛，並得金剛空行母授記；尊者於其座前接受一切灌頂，獲密諱為智密金剛。至二十九歲前，於諸獲得成就上師座前學金剛乘，精通一切教典、教授；一日心生：「密法唯我善巧。」生此念已，諸空行母於其夢中陳示眾多昔所未見密乘經函，摧其慢心。</blockquote>
-      <p>此段說明阿底峽尊者智慧很高，宿世善根深厚，對佛法具有極佳的習氣與領悟力。尊者於二十九歲前即開始學習金剛乘密法並接受灌頂，由於學習迅速，曾生起些許傲慢心。後來諸本尊及成就者於夢中示現更深廣的密法教授，使尊者體悟自身所學仍有限，進而降伏傲慢，增長謙卑與求法之心。</p>
-    </section>
-
-    <section id="chujia">
-      <h2>十一、出家與戒學成就</h2>
-      <blockquote>其後諸多上師、本尊於其面前或於夢中勸云：「若能出家，便能廣利聖教及諸眾生。」依此因緣，請大眾部持律上座，得加行道趣入實性一分三摩地者――名曰戒鎧為親教師而正出家，其諱名為吉祥燃燈智。此後至三十一歲前，學習相乘內明上下諸藏；特於能飛聚落法鎧上師座前，十二年中聽聞《大毘婆沙論》。精通根本四部之教典故，縱於各部中受食等微細取捨，亦無雜亂而遍了知。</blockquote>
-      <p>諸多上師與本尊勸請阿底峽尊者出家，以廣利聖教與眾生。出家後至三十一歲前廣學顯教經論，其中「上下諸藏」，上指量學七論，下指對法七論。尤其於法鎧上師座前，歷經十二年學習小乘重要論典《大毘婆沙論》，對經論與戒律皆有深厚造詣。</p>
-      <p>「精通根本四部之教典故」，尊者雖已通達顯教與密教，仍進一步深入學習戒律與三藏教典。由於精通各部派的戒律內容，因此對於受食等細微戒條的開遮持犯皆能清楚分辨。這也顯示阿底峽尊者極為重視戒體，並強調一切佛法若能建立在清淨戒行的實修基礎上，功德將更為殊勝。</p>
-    </section>
-
-    <!-- 重點提示 -->
-    <section id="summary" class="highlight">
-      <h2>★ 重點提示</h2>
-
-      <h3>一、《菩提道次第略論》的建立與傳承</h3>
-      <p>宗喀巴大師於 1402 年造《廣論》，1415 年造《略論》。《廣論》、《略論》與《三主要道》同屬道次第教授，內容皆依佛陀教法，引導修行者由凡夫地循序趣向佛果。本次課程採用如性法師譯本，遠登格西承接完整道次第傳承，法脈清淨殊勝。</p>
-
-      <h3>二、深見與廣行二大車軌</h3>
-      <p>佛陀所說八萬四千法門，總攝為深見與廣行兩大傳承。深見方面由文殊菩薩傳予龍樹菩薩，弘揚空性正見；廣行方面由彌勒菩薩透過《慈氏五論》傳予無著菩薩，弘揚廣大菩薩行。龍樹與無著承接佛陀大乘教法，特別是大乘教法在世間中提倡與興盛的主要因素，因此被尊稱為授記二大車軌。</p>
-
-      <h3>三、《菩提道次第》的內容與法源</h3>
-      <p>宗喀巴大師為令學人易於趣入深見與廣行二種道次第，而造《菩提道次第略論》。「菩提」指佛果，「道」指成佛的方法，「次第」指循序漸進的修學歷程。本論總攝一切佛經要義，完整涵攝三種士夫的修學次第，透過這論來實修從一個凡夫初學佛法開始至成佛的次第皆能指引你的修行道路的好導向。</p>
-      <p>法源依次為：<br>
-      佛陀以廣行法脈來論傳承如《般若波羅蜜多經》 → 至尊彌勒《現觀莊嚴論》 為主→ 無著、世親、安慧、金州大師、傳阿底峽。以深觀法脈來論佛陀傳於文殊菩薩-龍樹、聖天、佛護、月稱等傳⋯阿底峽尊者，尊者以廣行與深見傳承融合造《菩提道炬論》 傳於藏地→ 宗喀巴《菩提道次第》</p>
-
-      <h3>四、《略論》的四大綱要</h3>
-      <p>《略論》依智者傳統建立四大科判：</p>
-      <p>1. 開示造論者之殊勝<br>2. 開示法之殊勝<br>3. 如何聞說殊勝之法<br>4. 如何以正教授引導弟子之次第</p>
-      <p>本堂課主要進入第一科判，說明阿底峽尊者的殊勝功德。</p>
-
-      <h3>五、阿底峽尊者殊勝出身與廣學成就</h3>
-      <p>阿底峽尊者出身印度王族，二十一歲前即精通聲明、因明、工巧明與醫方明。十五歲時僅聽聞一遍《正理滴論》，便能折服外道。其後廣學顯密教法，接受金剛乘灌頂，獲密號「智密金剛」。曾因自認精通密法而生慢心，後經空行母示現未見過的密乘經函而降伏慢心。</p>
-
-      <h3>六、阿底峽尊者出家與戒學成就</h3>
-      <p>阿底峽尊者在諸上師與本尊勸請下出家，以戒鎧長老為親教師，法名吉祥燃燈智。出家後廣學上下諸藏，尤其於法鎧上師座前十二年間聽聞《大毘婆沙論》。尊者精通根本四部教典，對各部派戒律及微細取捨皆能清楚分辨，於顯教、密教與戒律三方面皆具深厚成就。</p>
-    </section>
-
-    <footer>《菩提道次第略論》第一堂 · 115/6/8 · 遠登格西講授 ｜ 向佛而行</footer>
+    -->
 
   </main>
 </div>
+
+<footer>《菩提道次第略論》 · 遠登格西 講授 ｜ 向佛而行</footer>
+
+<script>
+  document.querySelectorAll('.tab').forEach(function (tab) {
+    tab.addEventListener('click', function () {
+      document.querySelectorAll('.tab').forEach(function (t) { t.classList.remove('active'); });
+      document.querySelectorAll('.panel').forEach(function (p) { p.classList.remove('active'); });
+      tab.classList.add('active');
+      var target = document.getElementById(tab.dataset.target);
+      if (target) target.classList.add('active');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  });
+</script>
+
 </body>
 </html>
