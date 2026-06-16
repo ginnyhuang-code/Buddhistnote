@@ -4,8 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>佛子行三十七頌 — 向佛而行</title>
-<meta name="description" content="《佛子行三十七頌》偈頌原文與講授筆記。鄔瞿佛子無著賢造，嚴定法師譯、如石法師補譯，格桑達瓦格西講授。">
-<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@500;700&family=Noto+Sans+TC:wght@400;500&display=swap" rel="stylesheet">
+<meta name="description" content="《佛子行三十七頌》偈頌原文與講授筆記。鄔瞿佛子無著賢造，嚴定法師譯、如石法師補譯，格桑達瓦格西講授、慈誠格西翻譯。">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@300;400;500;700&family=Noto+Sans+TC:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
   :root{
     --parchment:#F7F3EE;
@@ -24,18 +24,17 @@
   body{
     background:var(--parchment);
     color:var(--ink);
-    font-family:'Noto Sans TC','PingFang TC','Microsoft JhengHei',sans-serif;
-    line-height:1.95;
-    font-size:17px;
+    font-family:'Noto Serif TC','Songti TC',serif;
+    min-height:100vh;
   }
   a{color:var(--gold);text-decoration:none;}
   a:hover{text-decoration:underline;}
 
   /* 整頁標題列 */
-  .page-header{max-width:1180px;margin:0 auto;padding:2.4rem 3rem 1.5rem;border-bottom:1px solid var(--rule);}
-  .page-header .ph-eyebrow{color:var(--gold);font-size:1rem;font-weight:500;letter-spacing:.03em;}
-  .page-header h1{font-family:'Noto Serif TC',serif;font-weight:700;font-size:2.5rem;color:var(--ink);line-height:1.3;margin:.5rem 0 .45rem;}
-  .page-header .ph-sub{color:var(--ink-soft);font-size:1.02rem;}
+  .page-header{max-width:1180px;margin:0 auto;padding:3rem 3rem 2rem;border-bottom:1px solid var(--rule);}
+  .page-header .ph-eyebrow{font-family:'Noto Sans TC',sans-serif;color:var(--gold);font-size:.88rem;font-weight:400;letter-spacing:.15em;margin-bottom:.6rem;}
+  .page-header h1{font-weight:700;font-size:2.25rem;color:var(--ink);letter-spacing:.05em;margin-bottom:.5rem;}
+  .page-header .ph-sub{font-family:'Noto Sans TC',sans-serif;color:var(--ink-soft);font-size:.95rem;font-weight:400;}
 
   /* 側欄＋內容 */
   .wrap{display:flex;max-width:1180px;margin:0 auto;align-items:flex-start;}
@@ -44,28 +43,28 @@
     border-right:1px solid var(--rule);
     position:sticky;top:0;align-self:flex-start;
   }
-  .toc-label{font-size:.78rem;letter-spacing:.1em;color:var(--ink-soft);margin:.2rem 0 .8rem;}
+  .toc-label{font-family:'Noto Sans TC',sans-serif;font-size:.82rem;font-weight:400;letter-spacing:.15em;color:var(--ink-soft);margin:.2rem 0 1rem;}
   .tab{
-    display:block;padding:.6rem .85rem;border-radius:8px;color:var(--ink);
-    font-size:.98rem;line-height:1.5;margin-bottom:.28rem;cursor:pointer;
+    display:block;padding:.6rem .85rem;border-radius:8px;color:var(--ink-soft);
+    font-family:'Noto Serif TC',serif;font-size:.95rem;font-weight:400;line-height:1.5;margin-bottom:.28rem;cursor:pointer;
     border-left:3px solid transparent;
   }
-  .tab:hover{background:var(--accent-bg);text-decoration:none;color:var(--gold);}
-  .tab.active{background:var(--active-bg);border-left-color:var(--gold);color:var(--gold);font-weight:700;}
-  .tab .date{color:var(--ink-soft);font-weight:400;font-size:.88rem;margin-left:.4rem;}
+  .tab:hover{background:var(--accent-bg);text-decoration:none;color:var(--ink);}
+  .tab.active{background:var(--active-bg);border-left-color:var(--gold);color:var(--gold);font-weight:500;}
+  .tab .date{color:var(--ink-soft);font-weight:400;font-size:.9rem;margin-left:.4rem;}
 
   .content{flex:1;min-width:0;padding:1.9rem 3rem 5rem;}
   .panel{display:none;}
   .panel.active{display:block;}
-  .panel .eyebrow{color:var(--gold);font-size:.95rem;margin-bottom:.25rem;}
+  .panel .eyebrow{font-family:'Noto Sans TC',sans-serif;color:var(--gold);font-size:.84rem;font-weight:400;letter-spacing:.12em;margin-bottom:.4rem;}
   .panel .title{
-    font-family:'Noto Serif TC',serif;font-weight:700;font-size:1.85rem;color:var(--ink);
+    font-weight:700;font-size:1.55rem;color:var(--ink);letter-spacing:.04em;
     border-bottom:1px solid var(--rule);padding-bottom:.85rem;margin-bottom:1.7rem;
   }
 
   @media (max-width:860px){
-    .page-header{padding:1.8rem 1.3rem 1.2rem;}
-    .page-header h1{font-size:2rem;}
+    .page-header{padding:2rem 1.3rem 1.4rem;}
+    .page-header h1{font-size:1.9rem;}
     .wrap{flex-direction:column;}
     .sidebar{width:auto;position:static;border-right:none;border-bottom:1px solid var(--rule);}
     .content{padding:1.6rem 1.3rem 4rem;}
@@ -73,17 +72,17 @@
 
   .block{margin-bottom:2.5rem;}
   .block h3{
-    font-family:'Noto Serif TC',serif;font-weight:700;font-size:1.25rem;color:var(--gold);
-    margin-bottom:1.1rem;padding-left:.7rem;border-left:5px solid var(--gold);
+    font-family:'Noto Sans TC',sans-serif;font-weight:500;font-size:.95rem;color:var(--gold);
+    letter-spacing:.08em;margin:2rem 0 1rem;
   }
-  .homage{text-align:center;font-family:'Noto Serif TC',serif;color:var(--gold);font-size:1.12rem;letter-spacing:.05em;margin:.2rem 0 1.8rem;}
+  .homage{text-align:center;color:var(--gold);font-size:1.05rem;font-weight:500;letter-spacing:.05em;margin:.2rem 0 1.8rem;}
   .verse{display:flex;gap:1rem;margin-bottom:1.35rem;align-items:baseline;}
-  .verse .vnum{flex-shrink:0;width:1.9rem;text-align:right;font-family:'Noto Serif TC',serif;font-weight:700;font-size:.95rem;color:var(--gold-light);}
-  .verse .vtext{font-family:'Noto Serif TC',serif;font-size:1.06rem;line-height:2.05;}
-  .verse-plain{font-family:'Noto Serif TC',serif;font-size:1.06rem;line-height:2.05;margin-bottom:1.35rem;padding-left:2.9rem;}
-  .colophon-note{color:var(--ink-soft);font-size:.96rem;line-height:1.9;margin-top:1.3rem;padding-left:2.9rem;}
+  .verse .vnum{flex-shrink:0;width:1.9rem;text-align:right;font-weight:500;font-size:.95rem;color:var(--gold-light);}
+  .verse .vtext{font-size:1.05rem;line-height:2;font-weight:500;color:var(--ink);}
+  .verse-plain{font-size:1.05rem;line-height:2;font-weight:500;color:var(--ink);margin-bottom:1.35rem;padding-left:2.9rem;}
+  .colophon-note{font-family:'Noto Sans TC',sans-serif;color:var(--ink-soft);font-size:.95rem;font-weight:400;line-height:1.9;margin-top:1.3rem;padding-left:2.9rem;}
 
-  footer{max-width:1180px;margin:0 auto;padding:1.6rem 3rem 2.5rem;border-top:1px solid var(--rule);color:var(--ink-soft);font-size:.85rem;text-align:center;}
+  footer{max-width:1180px;margin:0 auto;padding:1.6rem 3rem 2.5rem;border-top:1px solid var(--rule);color:var(--ink-soft);font-family:'Noto Sans TC',sans-serif;font-size:.85rem;text-align:center;}
 </style>
   <script>window.SITE_NAV = { crumbs: [{ label: "《佛子行三十七頌》" }] };</script>
   <script src="nav.js" defer></script>
@@ -91,7 +90,7 @@
 <body>
 
 <header class="page-header">
-  <div class="ph-eyebrow">鄔瞿佛子無著賢 造・嚴定法師 譯・如石法師 補譯・格桑達瓦格西 講授</div>
+  <div class="ph-eyebrow">鄔瞿佛子無著賢 造・嚴定法師 譯・如石法師 補譯・格桑達瓦格西 講授・慈誠格西翻譯</div>
   <h1>《佛子行三十七頌》</h1>
   <div class="ph-sub">偈頌原文 ＋ 講授筆記</div>
 </header>
